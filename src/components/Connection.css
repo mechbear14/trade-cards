@@ -1,0 +1,15 @@
+.connection{
+  display: flex;
+}
+
+@media screen and (max-width: 540px) {
+  .connection{
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 540px) {
+  .connection{
+    flex-direction: row;
+  }
+}

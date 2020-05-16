@@ -20,7 +20,9 @@
       "today_title response_title"
       "today_text response_text"
       "today_card response_card"
-      "none response_help";
+      "none response_help"
+      "none response_button"
+      "connection connection";
     }
   .box .grid-item:nth-child(1){
     grid-area: today_title;
@@ -42,5 +44,11 @@
   }
   .box .grid-item:nth-child(7){
     grid-area: response_help;
+  }
+  .box .grid-item:nth-child(8){
+    grid-area: response_button;
+  }
+  .box .grid-item:nth-child(9){
+    grid-area: connection;
   }
 }

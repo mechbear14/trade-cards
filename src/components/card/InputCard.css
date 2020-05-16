@@ -5,5 +5,47 @@
   background: transparent;
   font-size: 1.5rem;
   text-align: center;
-  resize: none;
+  position: relative;
+}
+
+.card .response::before{
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  z-index: 2;
+  transition: 0.5s ease-in-out;
+}
+
+.card .response:focus::before{
+  width: 100%;
+}
+
+.card .response::after{
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 1;
+  background-color: rgba(200, 16, 46, 0.2);
+}
+
+.card.white .response::before{
+  background-color: rgba(200, 16, 46, 1.0);
+}
+
+.card.white .response::after{
+  background-color: rgba(200, 16, 46, 0.2);
+}
+
+.card.red .response::before{
+  background-color: rgba(255, 255, 255, 1.0);
+}
+
+.card.red .response::after{
+  background-color: rgba(255, 255, 255, 0.2);
 }
