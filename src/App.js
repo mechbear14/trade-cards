@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Today from './pages/Today';
-import History from './pages/History';
+import NavBar from "./components/NavBar";
+import TodayComplete from './pages/TodayComplete';
 
 import './App.css';
 
@@ -9,8 +9,8 @@ class App extends React.Component{
   render(){
     return(
       <React.Fragment>
-      <Today />
-      <History />
+      <NavBar name="ThunderBear"/>
+      <TodayComplete />
       </React.Fragment>
     );
   }
