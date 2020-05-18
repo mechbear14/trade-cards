@@ -11,6 +11,19 @@
   padding: 0.5rem;
 }
 
+.card.small{
+  width: 150px;
+  height: 90px;
+  border-radius: 7.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem;
+}
+
 .card.red{
   background-color: rgb(200, 16, 46);
   color: rgb(255, 255, 255);
