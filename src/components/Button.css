@@ -1,0 +1,24 @@
+button{
+  width: 200px;
+  padding: 0.5rem;
+  background-color: rgb(200, 16, 46);
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-radius: 5px;
+  box-shadow: 0 10px 0 rgb(100, 8, 23);
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+button:active{
+  box-shadow: 0 5px 0 rgb(100, 8, 23);
+  transform: translateY(5px);
+}
+
+button:disabled{
+  background-color: rgb(160, 160, 160);
+  box-shadow: 0 10px 0 rgb(80, 80, 80);
+}

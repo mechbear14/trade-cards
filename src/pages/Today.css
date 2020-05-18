@@ -1,18 +1,23 @@
 @import "./BasePage.css";
 
-@media screen and (max-width: 540px) {
+.box{
+  width: 100%;
+}
+
+@media screen and (max-width: 700px) {
   .box{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  .box .text{
+  .box .text,
+  .box .multi-line{
     text-align: center;
   }
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 700px) {
   .box{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -21,8 +26,8 @@
       "today_text response_text"
       "today_card response_card"
       "none response_help"
-      "none response_button"
-      "connection connection";
+      "none response_button";
+    grid-gap: 0 15px;
     }
   .box .grid-item:nth-child(1){
     grid-area: today_title;
@@ -47,8 +52,5 @@
   }
   .box .grid-item:nth-child(8){
     grid-area: response_button;
-  }
-  .box .grid-item:nth-child(9){
-    grid-area: connection;
   }
 }

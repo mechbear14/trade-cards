@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Button.css";
+
 class Button extends React.Component{
   constructor(props){
     super(props);
@@ -9,7 +11,7 @@ class Button extends React.Component{
   }
   render(){
     return(
-      <h1>{this.props.name}</h1>
+      <button onClick={this.props.onClick}>{this.props.name}</button>
     );
   }
 }
