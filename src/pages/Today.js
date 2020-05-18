@@ -26,24 +26,20 @@ class Today extends React.Component{
     return(
       <div className="page">
         <div className="box">
-          <p className="section-title grid-item">Your card today</p>
-          <p className="text grid-item">Name one library/framework that does this</p>
-          <div className="grid-item">
+        <div className="column">
+          <p className="section-title">Your card today</p>
+          <p className="text">Name one library/framework that does this</p>
             <Card kind={this.state.assignedCard.kind} text={this.state.assignedCard.text} />
-          </div>
-          <p className="section-title grid-item">Your response</p>
-          <section className="multi-line grid-item">
-            <p className="text">Click the card below to respond.</p>
-            <p className="caption">Write no more than 30 characters.</p>
-            <p className="caption">You cannot change your response once submitted.</p>
-          </section>
-          <div className="grid-item">
-            <InputCard kind={this.state.nextKind} />
-          </div>
-          <p className="caption grid-item">How to respond</p>
-          <div className="grid-item">
-            <Button className="grid-item" name="Roar!" onClick={this.onClick}/>
-          </div>
+        </div>
+        <div className="column">
+          <p className="section-title">Your response</p>
+          <p className="text">Click the card below to respond.</p>
+          <p className="caption no-margin">Write no more than 30 characters.</p>
+          <p className="caption no-margin">You cannot change your response once submitted.</p>
+          <InputCard kind={this.state.nextKind} />
+          <p className="caption">How to respond</p>
+          <Button className="grid-item" name="Roar!" onClick={this.onClick}/>
+        </div>
         </div>
       </div>
     );

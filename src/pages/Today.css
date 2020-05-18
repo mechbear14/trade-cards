@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.no-margin{
+  margin: 0 !important;
+}
+
 @media screen and (max-width: 700px) {
   .box{
     display: flex;
@@ -11,8 +15,10 @@
     align-items: center;
     justify-content: center;
   }
-  .box .text,
-  .box .multi-line{
+  .column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 }
@@ -21,36 +27,6 @@
   .box{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-areas:
-      "today_title response_title"
-      "today_text response_text"
-      "today_card response_card"
-      "none response_help"
-      "none response_button";
     grid-gap: 0 15px;
-    }
-  .box .grid-item:nth-child(1){
-    grid-area: today_title;
-  }
-  .box .grid-item:nth-child(2){
-    grid-area: today_text;
-  }
-  .box .grid-item:nth-child(3){
-    grid-area: today_card;
-  }
-  .box .grid-item:nth-child(4){
-    grid-area: response_title;
-  }
-  .box .grid-item:nth-child(5){
-    grid-area: response_text;
-  }
-  .box .grid-item:nth-child(6){
-    grid-area: response_card;
-  }
-  .box .grid-item:nth-child(7){
-    grid-area: response_help;
-  }
-  .box .grid-item:nth-child(8){
-    grid-area: response_button;
   }
 }
