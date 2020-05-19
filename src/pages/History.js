@@ -7,7 +7,7 @@ import "./History.css";
 function History(props){
   return(
     <div className="page">
-    <p className="section-title">My previous cards</p>
+    <h2>My previous cards</h2>
       <div className="history">
         <Connection />
         <Connection />

@@ -46,18 +46,18 @@ class Today extends React.Component{
       nextKind: e.target.value
     });
   }
-  
+
   render() {
     return(
       <div className="page">
         <div className="box">
         <div className="column">
-          <p className="section-title">Your card today</p>
+          <h2>Your card today</h2>
           <Card kind={this.state.assignedCard.kind} text={this.state.assignedCard.text} />
         </div>
         <div className="column">
-          <p className="section-title">Your response</p>
-          <p className="text">Select a colour for the card, then click the card to respond.</p>
+          <h2>Your response</h2>
+          <p>Select a colour for the card, then click the card to respond.</p>
           <Choice choices={this.choices} name="nextKind" onSelect={this.onSelect}/>
           <div className="blank"> </div>
           <p className="caption no-margin">Write no more than 30 characters.</p>

@@ -9,7 +9,7 @@ function TodayComplete(props){
     <div className="page">
       <div className="box">
         <div className="column">
-          <p className="section-title">You have submitted your response.</p>
+          <h2>You have submitted your response.</h2>
           <p className="text">View all my previous responses</p>
         </div>
         <div className="column">

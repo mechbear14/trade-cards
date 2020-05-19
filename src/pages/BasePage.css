@@ -8,19 +8,31 @@
   color: white;
 }
 
-.page .title{
+.page.article {
+  align-items: flex-start;
+}
+
+.page.article ul{
+  margin-bottom: 1rem;
+}
+
+.page.article li{
+  margin-left: 2rem;
+}
+
+.page h1{
   font-weight: 600;
   font-size: 3rem;
   margin: 1rem 0;
 }
 
-.page .section-title{
+.page h2{
   font-weight: 600;
   font-size: 2rem;
   margin: 1rem 0;
 }
 
-.page .text{
+.page p{
   font-weight: 300;
   font-size: 1.2rem;
   margin-bottom: 1rem;

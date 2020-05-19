@@ -43,8 +43,10 @@ class NavBar extends React.Component{
           <button className="menu-btn" onClick={this.onClick}>
             <FontAwesomeIcon icon={icon} />
           </button>
-          <span className={`${this.state.menuOpened ? "" : "hide"}`}>{this.props.name}</span>
+          <span className={`${this.state.menuOpened ? "" : "hide"}`}>Trade Cards</span>
           <ul className={`${this.state.menuOpened ? "" : "hide"}`}>
+            <li><a href="https://github.io/mechbear14">How to play</a></li>
+            <li><a href="https://github.io/mechbear14">Log in</a></li>
             <li><a href="https://github.io/mechbear14">Today</a></li>
             <li><a href="https://github.io/mechbear14">My cards</a></li>
             <li><a href="https://github.io/mechbear14">Log out</a></li>

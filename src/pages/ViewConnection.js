@@ -46,7 +46,7 @@ class ViewConnection extends React.Component{
       <div className="page">
         <div className="box">
           <div className="column">
-            <p className="section-title">All connections to</p>
+            <h2>All connections to</h2>
             <Card kind={this.state.viewing.kind} text={this.state.viewing.text}/>
           </div>
           <div className="column">
