@@ -1,0 +1,17 @@
+@import "./OneColumnPage.css";
+
+.page .box{
+  max-width: 320px;
+}
+
+.page form{
+  max-width: 100%;
+}
+
+.page .box .text{
+  margin: 0;
+}
+
+.page .box .blank{
+  height: 10px;
+}

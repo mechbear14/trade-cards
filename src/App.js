@@ -1,7 +1,10 @@
 import React from 'react';
 
 import NavBar from "./components/NavBar";
-import ViewConnection from "./pages/ViewConnection";
+// import ViewConnection from "./pages/ViewConnection";
+// import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 import './App.css';
 
 class App extends React.Component{
@@ -9,7 +12,7 @@ class App extends React.Component{
     return(
       <React.Fragment>
       <NavBar name="ThunderBear"/>
-      <ViewConnection />
+      <Register />
       </React.Fragment>
     );
   }
