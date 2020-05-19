@@ -8,6 +8,10 @@
   margin: 0 !important;
 }
 
+.box .column .blank{
+  height: 20px;
+}
+
 @media screen and (max-width: 700px) {
   .box{
     display: flex;

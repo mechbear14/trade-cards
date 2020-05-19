@@ -12,7 +12,7 @@
   content: "";
   position: absolute;
   bottom: -4px;
-  left: 0;
+  left: 50%;
   width: 0;
   height: 2px;
   z-index: 2;
@@ -20,6 +20,7 @@
 }
 
 .card .response:focus::before{
+  left: 0;
   width: 100%;
 }
 
@@ -47,5 +48,13 @@
 }
 
 .card.red .response::after{
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.card.blue .response::before{
+  background-color: rgba(255, 255, 255, 1.0);
+}
+
+.card.blue .response::after{
   background-color: rgba(255, 255, 255, 0.2);
 }

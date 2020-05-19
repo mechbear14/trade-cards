@@ -33,3 +33,8 @@
   background-color: rgb(255, 255, 255);
   color: rgb(200, 16, 46);
 }
+
+.card.blue{
+  background-color: rgb(2, 65, 212);
+  color: rgb(255, 255, 255);
+}
