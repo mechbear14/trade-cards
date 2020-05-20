@@ -1,7 +1,7 @@
 import React from "react";
 import "./BaseCard.css";
 
-function Card(props){
+function Card(props) {
   return (
     <div className={`card ${props.kind} ${props.small ? "small" : ""}`}>
       {props.text}

@@ -1,29 +1,29 @@
 @import "./BasePage.css";
 
-.box{
+.today-complete .box {
   width: 100%;
   display: flex;
   align-items: center;
 }
 
 @media screen and (max-width: 800px) {
-  .box{
+  .today-complete .box {
     flex-direction: column;
     text-align: center;
   }
-  .box .column:nth-child(1){
+  .today-complete .box .column:nth-child(1) {
     order: 2;
   }
-  .box .column:nth-child(2){
+  .today-complete .box .column:nth-child(2) {
     order: 1;
   }
 }
 
 @media screen and (min-width: 800px) {
-  .box .column{
+  .today-complete .box .column {
     width: 50%;
   }
-  .box .column:nth-child(2){
+  .today-complete .box .column:nth-child(2) {
     display: flex;
     justify-content: flex-end;
     margin-right: 1rem;

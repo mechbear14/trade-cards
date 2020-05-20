@@ -1,9 +1,9 @@
-nav{
+nav {
   background-color: rgb(0, 16, 50);
   margin-bottom: 2rem;
 }
 
-nav .container{
+nav .container {
   max-width: 1000px;
   min-height: 4rem;
   margin: auto;
@@ -12,7 +12,7 @@ nav .container{
   justify-content: space-between;
 }
 
-nav .container button{
+nav .container button {
   width: 3rem;
   height: 3rem;
   background: none;
@@ -24,7 +24,7 @@ nav .container button{
   font-size: 2.5rem;
 }
 
-nav .container ul{
+nav .container ul {
   list-style: none;
   display: flex;
   align-items: center;
@@ -33,30 +33,31 @@ nav .container ul{
   color: rgb(255, 255, 255);
 }
 
-nav .container ul li{
+nav .container ul li {
   margin: 1rem 1rem;
 }
 
-nav .container ul li a{
+nav .container ul li a {
   color: rgb(255, 255, 255);
   text-decoration: none;
 }
 
-nav .container ul li a:hover{
+nav .container ul li a:hover {
   text-decoration: underline;
 }
 
-nav .container span{
+nav .container .span {
   color: rgb(255, 255, 255);
   font-weight: 600;
   font-size: 2rem;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 600px) {
-  nav .container button{
+  nav .container button {
     display: none;
   }
-  nav .container span{
+  nav .container .span {
     margin-left: 1rem;
   }
 }
@@ -67,19 +68,19 @@ nav .container span{
     align-items: center;
   }
 
-  nav .container ul{
+  nav .container ul {
     flex-direction: column;
   }
 
-  nav .container ul.hide{
+  nav .container ul.hide {
     display: none;
   }
 
-  nav .container span.hide{
+  nav .container .span.hide {
     display: none;
   }
 
-  nav .container button{
+  nav .container button {
     margin-left: 1rem;
     margin-top: 0.5rem;
     align-self: flex-start;
@@ -87,7 +88,7 @@ nav .container span{
 }
 
 @media screen and (min-width: 1000px) {
-  nav .container span{
+  nav .container .span {
     margin-left: 0;
   }
 }

@@ -1,4 +1,4 @@
-.card{
+.card {
   width: 200px;
   height: 120px;
   border-radius: 10px;
@@ -11,7 +11,7 @@
   padding: 0.5rem;
 }
 
-.card.small{
+.card.small {
   width: 150px;
   height: 90px;
   border-radius: 7.5px;
@@ -24,17 +24,17 @@
   padding: 0.5rem;
 }
 
-.card.red{
+.card.red {
   background-color: rgb(200, 16, 46);
   color: rgb(255, 255, 255);
 }
 
-.card.white{
+.card.white {
   background-color: rgb(255, 255, 255);
   color: rgb(200, 16, 46);
 }
 
-.card.blue{
+.card.blue {
   background-color: rgb(2, 65, 212);
   color: rgb(255, 255, 255);
 }

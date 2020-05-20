@@ -1,4 +1,4 @@
-.page{
+.page {
   max-width: 1000px;
   margin: auto;
   display: flex;
@@ -12,41 +12,49 @@
   align-items: flex-start;
 }
 
-.page.article ul{
+.page.article ul {
   margin-bottom: 1rem;
 }
 
-.page.article li{
+.page.article li {
   margin-left: 2rem;
 }
 
-.page h1{
+.page h1 {
   font-weight: 600;
   font-size: 3rem;
   margin: 1rem 0;
 }
 
-.page h2{
+.page h2 {
   font-weight: 600;
   font-size: 2rem;
   margin: 1rem 0;
 }
 
-.page p{
+.page p {
   font-weight: 300;
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
 
-.page .caption{
+.page .caption {
   font-weight: 300;
   font-size: 1rem;
   margin: 1rem 0;
   color: rgba(255, 255, 255, 0.8);
 }
 
-@media screen and (max-width: 1000px){
-  .page{
+.page .link {
+  text-decoration: underline;
+}
+
+.page .link:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .page {
     margin: 0 1rem;
   }
 }

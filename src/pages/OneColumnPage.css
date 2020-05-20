@@ -1,6 +1,6 @@
 @import "./BasePage.css";
 
-.page .box{
+.page.one-column .box {
   display: flex;
   flex-direction: column;
   align-items: center;

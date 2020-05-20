@@ -1,16 +1,18 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown/with-html";
 
 import "../BasePage.css";
 
-const article = `
+import Card from "../../components/card/Card";
+
+const section1 = `
 ## How to play
 
 In this activity, there are three types of cards:
 
-- A blue card has a software application written on it
-- A red card has a concept or terminology in computer science or business related to IT
-- A white card has a software tool used to write computer programs
+- A **blue card** has a software application, or a kind of software applications, written on it
+- A **red card** has a concept or terminology in computer science or business related to IT
+- A **white card** has a software tool used to write computer programs
 
 For each type of card, you can respond with any one of the three types and write corresponding type of content on it.
 You just need to make sure the content on the card you respond with is related to that on the card you're given.
@@ -18,7 +20,8 @@ You just need to make sure the content on the card you respond with is related t
 To find that related information, you must do some research, for example, on the Internet. We will discuss some of the tactics later.
 
 There's no winning or losing in this activity (and thus I don't call it a game). The purpose of this activity is to get to know the world of programming by doing mini-research like this.
-
+`;
+const section2 = `
 ## Questions to ask when searching
 
 If you're given a **blue card** (application):
@@ -49,12 +52,38 @@ As you have probably discovered, you don't have to be registered in a season to 
 Happy searching!
 `;
 
-function HowToPlay(props){
+function HowToPlay(props) {
   return (
     <div className="page article">
-      <ReactMarkdown source={article} />
+      <ReactMarkdown source={section1} />
+      <h2>How to respond to a card</h2>
+      <p>For example, if you're given this card</p>
+      <Card kind="white" text="Three.js" small={true} />
+      <p style={{ marginTop: 10 }}>
+        which is a white (library/framework) card, you can go to its website
+        (https://threejs.org/ in this case) and check its{" "}
+        <strong>documentation</strong>, where you might find:
+      </p>
+      <ul>
+        <li>
+          It can be used to draw 3D stuff, which is a research field in computer
+          science, so you respond with a red card{" "}
+          <Card kind="red" text="3D graphics" small={true} />
+        </li>
+        <li>
+          It uses WebGL under the hood, which is an API (application programming
+          interface), so you respond with a white card{" "}
+          <Card kind="white" text="WebGL" small={true} />
+        </li>
+        <li>
+          It provides a render engine for us to use, which is a kind of
+          application, so you respond with a blue card{" "}
+          <Card kind="blue" text="Render engine" small={true} />
+        </li>
+      </ul>
+      <ReactMarkdown source={section2} />
     </div>
   );
 }
 
-export default HowToPlay
+export default HowToPlay;

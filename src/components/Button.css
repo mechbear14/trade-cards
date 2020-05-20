@@ -1,4 +1,4 @@
-.button button{
+.button button {
   width: 200px;
   padding: 0.5rem;
   background-color: rgb(200, 16, 46);
@@ -9,16 +9,16 @@
   box-shadow: 0 10px 0 rgb(100, 8, 23);
 }
 
-.button button:hover{
+.button button:hover {
   cursor: pointer;
 }
 
-.button button:active{
+.button button:active {
   box-shadow: 0 5px 0 rgb(100, 8, 23);
   transform: translateY(5px);
 }
 
-.button button:disabled{
+.button button:disabled {
   background-color: rgb(160, 160, 160);
   box-shadow: 0 10px 0 rgb(80, 80, 80);
 }

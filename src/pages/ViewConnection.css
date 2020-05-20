@@ -1,19 +1,19 @@
 @import "./BasePage.css";
 
-.box{
+.view-connection .box {
   display: grid;
   grid-gap: 15px;
   width: 100%;
 }
 
 @media screen and (max-width: 500px) {
-  .box{
+  .view-connection .box {
     grid-template-columns: 1fr;
   }
 }
 
 @media screen and (min-width: 500px) {
-  .box{
+  .view-connection .box {
     grid-template-columns: repeat(2, 1fr);
   }
 }

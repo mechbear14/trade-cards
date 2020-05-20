@@ -1,11 +1,11 @@
 @import "./BasePage.css";
 
-.history{
+.history {
   width: 100%;
 }
 
 @media screen and (max-width: 1000px) {
-  .history{
+  .history {
     display: grid;
     grid-template-columns: 1fr;
     justify-items: center;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (min-width: 1000px) {
-  .history{
+  .history {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;

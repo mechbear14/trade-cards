@@ -2,15 +2,15 @@ import React from "react";
 
 import "./Button.css";
 
-class Button extends React.Component{
-  constructor(props){
+class Button extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
-      submitted: false
+      submitted: false,
     };
   }
-  render(){
-    return(
+  render() {
+    return (
       <div className="button">
         <button onClick={this.props.onClick}>{this.props.name}</button>
       </div>

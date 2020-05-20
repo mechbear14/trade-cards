@@ -1,17 +1,17 @@
 @import "./OneColumnPage.css";
 
-.page .box{
+.page.one-column .box {
   max-width: 320px;
 }
 
-.page form{
+.page.one-column form {
   max-width: 100%;
 }
 
-.page .box .text{
+.page.one-column .box .text {
   margin: 0;
 }
 
-.page .box .blank{
+.page.one-column .box .blank {
   height: 10px;
 }

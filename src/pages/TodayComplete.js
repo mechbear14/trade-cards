@@ -4,9 +4,9 @@ import Connection from "../components/Connection";
 
 import "./TodayComplete.css";
 
-function TodayComplete(props){
+function TodayComplete(props) {
   return (
-    <div className="page">
+    <div className="page today-complete">
       <div className="box">
         <div className="column">
           <h2>You have submitted your response.</h2>
