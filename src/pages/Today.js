@@ -59,6 +59,7 @@ class Today extends React.Component {
       <div className="page today">
         <div className="box">
           <div className="column">
+            <h1>Welcome, {this.props.loggedInUser.callSign}</h1>
             <h2>Your card today</h2>
             <Card
               kind={this.state.assignedCard.kind}

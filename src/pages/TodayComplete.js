@@ -14,6 +14,7 @@ function TodayComplete(props) {
     <div className="page today-complete">
       <div className="box">
         <div className="column">
+          <h1>Welcome, {this.props.loggedInUser.callSign}</h1>
           <h2>You have submitted your response.</h2>
           <p className="text">View all my previous responses</p>
         </div>

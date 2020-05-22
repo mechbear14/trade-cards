@@ -62,7 +62,6 @@ export const login = (callSign, password) => {
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.docs.length > 0) {
-          console.log(querySnapshot.docs[0].data());
           let email = querySnapshot.docs[0].data().email;
           return Firebase.auth().signInWithEmailAndPassword(email, password);
         } else {

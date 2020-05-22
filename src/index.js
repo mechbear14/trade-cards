@@ -16,11 +16,35 @@ Firebase.initializeApp(FirebaseConfig);
 
 const store = createStore(RootReducer, applyMiddleware(thunk));
 
-ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
-  document.getElementById("root")
-);
+Firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    Firebase.firestore()
+      .collection("users")
+      .doc(user.uid)
+      .get()
+      .then((userDoc) => {
+        let currentUser = {
+          userId: user.uid,
+          callSign: userDoc.data().callSign,
+        };
+        store.dispatch({
+          type: "OPEN_APP",
+          user: currentUser,
+        });
+        onCreate(store);
+      });
+  } else {
+    onCreate(store);
+  }
+});
+
+function onCreate(store) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>,
+    document.getElementById("root")
+  );
+}

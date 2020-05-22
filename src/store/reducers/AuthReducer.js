@@ -39,19 +39,23 @@ export const AuthReducer = (state = initialState, action) => {
         error: null,
       };
     case "LOGOUT":
-      console.log(action);
       return {
         ...state,
         loggedInUser: null,
       };
     case "LOGOUT_ERROR":
-      console.log(action);
       return {
         ...state,
         error: action.error,
       };
     case "RECOVER":
       return state;
+    case "OPEN_APP":
+      console.log(action.user);
+      return {
+        ...state,
+        loggedInUser: action.user,
+      };
     default:
       return state;
   }
