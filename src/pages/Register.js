@@ -1,5 +1,8 @@
 import React from "react";
 
+import { register, resetErrors } from "../store/actions/AuthActions";
+import { connect } from "react-redux";
+
 import LabelledInput from "../components/LabelledInput";
 import Button from "../components/Button";
 import Error from "../components/Error";
@@ -10,13 +13,19 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      callSign: "",
       password: "",
-      error: false,
+      email: "",
+      errors: [],
     };
   }
 
   onChange = (e) => {
+    this.props.resetErrors();
+    if (this.state.errors.length > 0) {
+      this.setState({
+        errors: [],
+      });
+    }
     this.setState({
       [e.target.id]: e.target.value,
     });
@@ -24,41 +33,91 @@ class Register extends React.Component {
 
   onClick = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    let errors = [];
+    if (this.state.password.length < 8) {
+      errors.push({ message: "Password must be at least 8-digit long" });
+    }
+    let emailRegExp = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
+    if (!this.state.email.match(emailRegExp)) {
+      errors.push({ message: "Invalid email address" });
+    }
+    if (errors.length === 0) {
+      this.props.register(this.state.password, this.state.email);
+    } else {
+      this.setState({
+        errors,
+      });
+    }
   };
 
+  onTowardsLogin = () => {
+    this.props.history.push("/login");
+  };
+
+  componentWillUnmount() {
+    this.props.resetErrors();
+  }
+
   render() {
-    return (
-      <div className="page  one-column">
-        <h2>Select a password.</h2>
-        <p>You will then be assigned your call sign!</p>
-        <form>
-          <div className="box">
-            {this.state.error && (
-              <React.Fragment>
-                <Error message="Error" />
-                <div className="blank"></div>
-              </React.Fragment>
-            )}
-            <LabelledInput
-              name="Password"
-              type="password"
-              id="password"
-              onChange={this.onChange}
-            />
-            <LabelledInput
-              name="Password recovery email"
-              type="email"
-              id="email"
-              onChange={this.onChange}
-            />
-            <div className="blank"></div>
-            <Button name="Register" onClick={this.onClick} />
-          </div>
-        </form>
-      </div>
-    );
+    let errors = this.state.errors.slice();
+    if (this.props.firebaseError) {
+      errors.push(this.props.firebaseError);
+    }
+    if (this.props.newUser) {
+      return (
+        <div className="page one-column">
+          <p>Your call sign for this season is</p>
+          <h2>{this.props.newUser.callSign}</h2>
+          <p>Your can now log in with your call sign and password</p>
+          <div className="blank"></div>
+          <Button name="Log in" onClick={this.onTowardsLogin} />
+        </div>
+      );
+    } else {
+      return (
+        <div className="page one-column">
+          <h2>Select a password.</h2>
+          <p>You will then be assigned your call sign for this season!</p>
+          <form>
+            <div className="box">
+              {errors[0] &&
+                errors.map((error, index) => (
+                  <React.Fragment key={index}>
+                    <Error message={error.message} />
+                    <div className="blank"></div>
+                  </React.Fragment>
+                ))}
+              <LabelledInput
+                name="Password"
+                type="password"
+                id="password"
+                onChange={this.onChange}
+              />
+              <LabelledInput
+                name="Password recovery email"
+                type="email"
+                id="email"
+                onChange={this.onChange}
+              />
+              <div className="blank"></div>
+              <Button name="Register" onClick={this.onClick} />
+            </div>
+          </form>
+        </div>
+      );
+    }
   }
 }
 
-export default Register;
+const mapStateToProps = (state) => {
+  return { firebaseError: state.auth.error, newUser: state.auth.newUser };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    register: (password, email) => dispatch(register(password, email)),
+    resetErrors: () => dispatch(resetErrors()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

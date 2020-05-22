@@ -22,30 +22,14 @@ class App extends React.Component {
       <Router>
         <NavBar />
         <Switch>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/today">
-            <Today />
-          </Route>
-          <Route path="/today-complete">
-            <TodayComplete />
-          </Route>
-          <Route path="/history">
-            <History />
-          </Route>
-          <Route path="/card/:id">
-            <ViewConnection />
-          </Route>
-          <Route path="/how-to-play">
-            <HowToPlay />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/today" component={Today} />
+          <Route path="/today-complete" component={TodayComplete} />
+          <Route path="/history" component={History} />
+          <Route path="/card/:id" component={ViewConnection} />
+          <Route path="/how-to-play" component={HowToPlay} />
+          <Route path="/" component={Home} />
         </Switch>
       </Router>
     );
