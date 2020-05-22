@@ -7,6 +7,8 @@ import Choice from "../components/Choice";
 import Error from "../components/Error";
 
 import "./Today.css";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class Today extends React.Component {
   choices = [
@@ -50,6 +52,9 @@ class Today extends React.Component {
   };
 
   render() {
+    if (!(this.props.loggedInUser && this.props.loggedInUser.userId)) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="page today">
         <div className="box">
@@ -96,4 +101,8 @@ class Today extends React.Component {
   }
 }
 
-export default Today;
+const mapStateToProps = (state) => {
+  return { loggedInUser: state.auth.loggedInUser };
+};
+
+export default connect(mapStateToProps)(Today);

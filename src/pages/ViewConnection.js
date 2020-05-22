@@ -4,6 +4,8 @@ import Card from "../components/card/Card";
 import CardWithCount from "../components/card/CardWithCount";
 
 import "./ViewConnection.css";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class ViewConnection extends React.Component {
   constructor(props) {
@@ -38,6 +40,9 @@ class ViewConnection extends React.Component {
   };
 
   render() {
+    if (!(this.props.loggedInUser && this.props.loggedInUser.userId)) {
+      return <Redirect to="/" />;
+    }
     let connectedTo = this.state.connectedTo
       .sort((a, b) => b.count - a.count)
       .map((card, index) => (
@@ -66,4 +71,8 @@ class ViewConnection extends React.Component {
   }
 }
 
-export default ViewConnection;
+const mapStateToProps = (state) => {
+  return { loggedInUser: state.auth.loggedInUser };
+};
+
+export default connect(mapStateToProps)(ViewConnection);

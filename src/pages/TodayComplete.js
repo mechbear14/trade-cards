@@ -3,8 +3,13 @@ import React from "react";
 import Connection from "../components/Connection";
 
 import "./TodayComplete.css";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 function TodayComplete(props) {
+  if (!(props.loggedInUser && props.loggedInUser.userId)) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="page today-complete">
       <div className="box">
@@ -20,4 +25,8 @@ function TodayComplete(props) {
   );
 }
 
-export default TodayComplete;
+const mapStateToProps = (state) => {
+  return { loggedInUser: state.auth.loggedInUser };
+};
+
+export default connect(mapStateToProps)(TodayComplete);

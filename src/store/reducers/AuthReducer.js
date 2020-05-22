@@ -1,4 +1,4 @@
-const initialState = {};
+const initialState = { error: null, newUser: null, loggedInUser: null };
 
 export const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -21,9 +21,35 @@ export const AuthReducer = (state = initialState, action) => {
         error: null,
       };
     case "LOGIN":
-      return state;
+      return {
+        ...state,
+        loggedInUser: action.loggedInUser,
+        error: null,
+      };
+    case "LOGIN_ERROR":
+      console.log(action);
+      return {
+        ...state,
+        loggedInUser: null,
+        error: action.error,
+      };
+    case "RESET_LOGIN_ERRORS":
+      return {
+        ...state,
+        error: null,
+      };
     case "LOGOUT":
-      return state;
+      console.log(action);
+      return {
+        ...state,
+        loggedInUser: null,
+      };
+    case "LOGOUT_ERROR":
+      console.log(action);
+      return {
+        ...state,
+        error: action.error,
+      };
     case "RECOVER":
       return state;
     default:

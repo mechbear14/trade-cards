@@ -4,7 +4,11 @@ import LabelledInput from "../components/LabelledInput";
 import Button from "../components/Button";
 import Error from "../components/Error";
 
+import { login, resetErrors } from "../store/actions/AuthActions";
+
 import "./Login.css";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,11 +16,17 @@ class Login extends React.Component {
     this.state = {
       callSign: "",
       password: "",
-      error: false,
+      errors: [],
     };
   }
 
   onChange = (e) => {
+    this.props.resetErrors();
+    if (this.state.errors.length > 0) {
+      this.setState({
+        errors: [],
+      });
+    }
     this.setState({
       [e.target.id]: e.target.value,
     });
@@ -24,20 +34,45 @@ class Login extends React.Component {
 
   onClick = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    let errors = [];
+    if (this.state.callSign.length === 0) {
+      errors.push({ message: "Call sign cannot be blank" });
+    }
+    if (this.state.password.length === 0) {
+      errors.push({ message: "Password cannot be blank" });
+    }
+    if (errors.length === 0) {
+      this.props.login(this.state.callSign, this.state.password);
+    } else {
+      this.setState({
+        errors,
+      });
+    }
   };
 
+  componentWillUnmount() {
+    this.props.resetErrors();
+  }
+
   render() {
+    if (this.props.loggedInUser && this.props.loggedInUser.userId) {
+      return <Redirect to="/today" />;
+    }
+    let errors = this.state.errors.slice();
+    if (this.props.firebaseError) {
+      errors.push(this.props.firebaseError);
+    }
     return (
       <div className="page one-column">
         <form>
           <div className="box">
-            {this.state.error && (
-              <React.Fragment>
-                <Error message="Error" />
-                <div className="blank"></div>
-              </React.Fragment>
-            )}
+            {errors[0] &&
+              errors.map((error, index) => (
+                <React.Fragment key={index}>
+                  <Error message={error.message} />
+                  <div className="blank"></div>
+                </React.Fragment>
+              ))}
             <LabelledInput
               name="Your call sign"
               type="text"
@@ -59,4 +94,18 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    firebaseError: state.auth.error,
+    loggedInUser: state.auth.loggedInUser,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (callSign, password) => dispatch(login(callSign, password)),
+    resetErrors: () => dispatch(resetErrors()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

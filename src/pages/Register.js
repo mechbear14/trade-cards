@@ -2,6 +2,7 @@ import React from "react";
 
 import { register, resetErrors } from "../store/actions/AuthActions";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import LabelledInput from "../components/LabelledInput";
 import Button from "../components/Button";
@@ -59,6 +60,9 @@ class Register extends React.Component {
   }
 
   render() {
+    if (this.props.loggedInUser && this.props.loggedInUser.userId) {
+      return <Redirect to="/" />;
+    }
     let errors = this.state.errors.slice();
     if (this.props.firebaseError) {
       errors.push(this.props.firebaseError);

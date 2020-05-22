@@ -54,8 +54,59 @@ export const register = (password, email) => {
   };
 };
 
-export const login = (email, password) => {
-  return (dispatch, getState) => {};
+export const login = (callSign, password) => {
+  return (dispatch, getState) => {
+    Firebase.firestore()
+      .collection("users")
+      .where("callSign", "==", callSign)
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.docs.length > 0) {
+          console.log(querySnapshot.docs[0].data());
+          let email = querySnapshot.docs[0].data().email;
+          return Firebase.auth().signInWithEmailAndPassword(email, password);
+        } else {
+          return new Promise((resolve, reject) => {
+            reject({
+              message: "This call sign does not exist for the current season",
+            });
+          });
+        }
+      })
+      .then((userCredential) => {
+        dispatch({
+          type: "LOGIN",
+          loggedInUser: {
+            userId: userCredential.user.uid,
+            callSign,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: "LOGIN_ERROR",
+          error,
+        });
+      });
+  };
+};
+
+export const logout = () => {
+  return (dispatch, getState) => {
+    Firebase.auth()
+      .signOut()
+      .then(
+        dispatch({
+          type: "LOGOUT",
+        })
+      )
+      .catch((error) => {
+        dispatch({
+          type: "LOGOUT_ERROR",
+          error,
+        });
+      });
+  };
 };
 
 export const recoverPassword = (email) => {
