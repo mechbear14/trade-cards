@@ -17,6 +17,9 @@ class InputCard extends React.Component {
       this.setState({
         text: textContent,
       });
+      if (this.props.getText) {
+        this.props.getText(textContent);
+      }
     }
   };
 

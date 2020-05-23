@@ -1,42 +1,49 @@
-const initialState = { error: null, newUser: null, loggedInUser: null };
+const initialState = {
+  knowAuthInfo: false,
+  loggedInUser: null,
+  registeredUser: null,
+  registerError: null,
+  loginError: null,
+  logoutError: null,
+};
 
 export const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case "REGISTER":
       return {
         ...state,
-        newUser: action.newUser,
-        error: null,
+        registeredUser: action.newUser,
+        registerError: null,
       };
     case "REGISTER_ERROR":
       return {
         ...state,
-        newUser: null,
-        error: action.error,
+        registeredUser: null,
+        registerError: action.error,
       };
-    case "RESET_REGISTER_ERRORS":
+    case "RESET_REGISTER_ERROR":
       return {
         ...state,
-        newUser: null,
-        error: null,
+        registeredUser: null,
+        registerError: null,
       };
     case "LOGIN":
       return {
         ...state,
         loggedInUser: action.loggedInUser,
-        error: null,
+        loginError: null,
       };
     case "LOGIN_ERROR":
       console.log(action);
       return {
         ...state,
         loggedInUser: null,
-        error: action.error,
+        loginError: action.error,
       };
-    case "RESET_LOGIN_ERRORS":
+    case "RESET_LOGIN_ERROR":
       return {
         ...state,
-        error: null,
+        loginError: null,
       };
     case "LOGOUT":
       return {
@@ -46,14 +53,14 @@ export const AuthReducer = (state = initialState, action) => {
     case "LOGOUT_ERROR":
       return {
         ...state,
-        error: action.error,
+        logoutError: action.error,
       };
     case "RECOVER":
       return state;
     case "OPEN_APP":
-      console.log(action.user);
       return {
         ...state,
+        knowAuthInfo: true,
         loggedInUser: action.user,
       };
     default:

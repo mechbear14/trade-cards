@@ -8,7 +8,7 @@ import Error from "../components/Error";
 
 import "./Today.css";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { respond } from "../store/actions/CardActions";
 
 class Today extends React.Component {
   choices = [
@@ -32,18 +32,31 @@ class Today extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      assignedCard: {
-        kind: "blue",
-        text: "Distributed messaging system",
-      },
       nextKind: "blue",
-      error: false,
+      nextText: "",
+      errors: [],
     };
   }
 
-  onClick() {
-    alert("Roar! You've found me!");
-  }
+  onClick = () => {
+    let errors = [];
+    if (this.state.nextText.length === 0) {
+      errors.push({ message: "Your response cannot be blank" });
+    }
+    if (errors.length === 0) {
+      let userId = this.props.loggedInUser.userId;
+      let card = {
+        kind: this.state.nextKind,
+        text: this.state.nextText,
+      };
+      this.props.respond(userId, card);
+    } else {
+      this.setState({
+        errors,
+      });
+    }
+    console.log(this.state);
+  };
 
   onSelect = (e) => {
     this.setState({
@@ -51,19 +64,29 @@ class Today extends React.Component {
     });
   };
 
-  render() {
-    if (!(this.props.loggedInUser && this.props.loggedInUser.userId)) {
-      return <Redirect to="/" />;
+  getText = (text) => {
+    if (this.state.errors.length > 0) {
+      this.setState({
+        errors: [],
+      });
     }
+    this.setState({
+      nextText: text,
+    });
+  };
+
+  render() {
+    let errors = this.state.errors.slice();
+    if (this.props.fetchCardError) errors.push(this.props.fetchCardError);
+    if (this.props.respondError) errors.push(this.props.respondError);
     return (
       <div className="page today">
         <div className="box">
           <div className="column">
-            <h1>Welcome, {this.props.loggedInUser.callSign}</h1>
             <h2>Your card today</h2>
             <Card
-              kind={this.state.assignedCard.kind}
-              text={this.state.assignedCard.text}
+              kind={this.props.assignedCard.kind}
+              text={this.props.assignedCard.text}
             />
           </div>
           <div className="column">
@@ -82,13 +105,14 @@ class Today extends React.Component {
               You cannot change your response once submitted.
             </p>
             <div className="blank"> </div>
-            <InputCard kind={this.state.nextKind} />
-            {this.state.error && (
-              <React.Fragment>
-                <div className="blank"></div>
-                <Error message="Error" />
-              </React.Fragment>
-            )}
+            <InputCard kind={this.state.nextKind} getText={this.getText} />
+            {errors[0] &&
+              errors.map((error, index) => (
+                <React.Fragment key={index}>
+                  <div className="blank"></div>
+                  <Error message={error.message} />
+                </React.Fragment>
+              ))}
             <p className="caption link">How to respond</p>
             <Button
               className="grid-item"
@@ -103,7 +127,17 @@ class Today extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { loggedInUser: state.auth.loggedInUser };
+  return {
+    loggedInUser: state.auth.loggedInUser,
+    fetchError: state.card.fetchCardError,
+    respondError: state.card.respondError,
+  };
 };
 
-export default connect(mapStateToProps)(Today);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    respond: (userId, card) => dispatch(respond(userId, card)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Today);

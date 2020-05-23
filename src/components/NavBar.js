@@ -84,7 +84,7 @@ class NavBar extends React.Component {
             <li>
               <NavLink to="/how-to-play">How to play</NavLink>
             </li>
-            {navItems}
+            {this.props.knowAuthInfo ? navItems : ""}
           </ul>
         </div>
       </nav>
@@ -93,7 +93,10 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { loggedInUser: state.auth.loggedInUser };
+  return {
+    knowAuthInfo: state.auth.knowAuthInfo,
+    loggedInUser: state.auth.loggedInUser,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

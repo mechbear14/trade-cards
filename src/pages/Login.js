@@ -4,7 +4,7 @@ import LabelledInput from "../components/LabelledInput";
 import Button from "../components/Button";
 import Error from "../components/Error";
 
-import { login, resetErrors } from "../store/actions/AuthActions";
+import { login, resetLoginError } from "../store/actions/AuthActions";
 
 import "./Login.css";
 import { connect } from "react-redux";
@@ -21,7 +21,7 @@ class Login extends React.Component {
   }
 
   onChange = (e) => {
-    this.props.resetErrors();
+    this.props.resetError();
     if (this.state.errors.length > 0) {
       this.setState({
         errors: [],
@@ -51,7 +51,7 @@ class Login extends React.Component {
   };
 
   componentWillUnmount() {
-    this.props.resetErrors();
+    this.props.resetError();
   }
 
   render() {
@@ -96,7 +96,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    firebaseError: state.auth.error,
+    firebaseError: state.auth.loginError,
     loggedInUser: state.auth.loggedInUser,
   };
 };
@@ -104,7 +104,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (callSign, password) => dispatch(login(callSign, password)),
-    resetErrors: () => dispatch(resetErrors()),
+    resetError: () => dispatch(resetLoginError()),
   };
 };
 

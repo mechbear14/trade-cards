@@ -1,6 +1,6 @@
 import React from "react";
 
-import { register, resetErrors } from "../store/actions/AuthActions";
+import { register, resetRegisterError } from "../store/actions/AuthActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
@@ -56,22 +56,22 @@ class Register extends React.Component {
   };
 
   componentWillUnmount() {
-    this.props.resetErrors();
+    this.props.resetError();
   }
 
   render() {
     if (this.props.loggedInUser && this.props.loggedInUser.userId) {
-      return <Redirect to="/" />;
+      return <Redirect to="/today" />;
     }
     let errors = this.state.errors.slice();
     if (this.props.firebaseError) {
       errors.push(this.props.firebaseError);
     }
-    if (this.props.newUser) {
+    if (this.props.registeredUser) {
       return (
         <div className="page one-column">
           <p>Your call sign for this season is</p>
-          <h2>{this.props.newUser.callSign}</h2>
+          <h2>{this.props.registeredUser.callSign}</h2>
           <p>Your can now log in with your call sign and password</p>
           <div className="blank"></div>
           <Button name="Log in" onClick={this.onTowardsLogin} />
@@ -114,13 +114,16 @@ class Register extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { firebaseError: state.auth.error, newUser: state.auth.newUser };
+  return {
+    firebaseError: state.auth.error,
+    registeredUser: state.auth.registeredUser,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     register: (password, email) => dispatch(register(password, email)),
-    resetErrors: () => dispatch(resetErrors()),
+    resetError: () => dispatch(resetRegisterError()),
   };
 };
 

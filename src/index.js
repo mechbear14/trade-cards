@@ -31,20 +31,21 @@ Firebase.auth().onAuthStateChanged((user) => {
           type: "OPEN_APP",
           user: currentUser,
         });
-        onCreate(store);
       });
   } else {
-    onCreate(store);
+    let currentUser = null;
+    store.dispatch({
+      type: "OPEN_APP",
+      user: currentUser,
+    });
   }
 });
 
-function onCreate(store) {
-  ReactDOM.render(
-    <Provider store={store}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </Provider>,
-    document.getElementById("root")
-  );
-}
+ReactDOM.render(
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById("root")
+);

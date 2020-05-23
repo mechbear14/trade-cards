@@ -112,10 +112,18 @@ export const recoverPassword = (email) => {
   return (dispatch, getState) => {};
 };
 
-export const resetErrors = () => {
+export const resetLoginError = () => {
   return (dispatch, getState) => {
     dispatch({
-      type: "RESET_REGISTER_ERRORS",
+      type: "RESET_LOGIN_ERROR",
+    });
+  };
+};
+
+export const resetRegisterError = () => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: "RESET_REGISTER_ERROR",
     });
   };
 };
