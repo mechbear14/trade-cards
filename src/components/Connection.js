@@ -21,8 +21,8 @@ class Connection extends React.Component {
   render() {
     return (
       <div className="connection">
-        <Card kind={this.state.card1.kind} text={this.state.card1.text} />
-        <Card kind={this.state.card2.kind} text={this.state.card2.text} />
+        <Card kind={this.props.card1.kind} text={this.props.card1.text} />
+        <Card kind={this.props.card2.kind} text={this.props.card2.text} />
       </div>
     );
   }

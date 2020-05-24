@@ -1,30 +1,52 @@
 import React from "react";
 
-import Connection from "../components/Connection";
+import ConnectionWithLink from "../components/ConnectionWithLink";
 
 import "./History.css";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { viewByCreator } from "../store/actions/ConnectionActions";
 
-function History(props) {
-  if (!(props.loggedInUser && props.loggedInUser.userId)) {
-    return <Redirect to="/" />;
-  }
-  return (
-    <div className="page">
-      <h2>My previous cards</h2>
-      <div className="history">
-        <Connection />
-        <Connection />
-        <Connection />
-        <Connection />
+class History extends React.Component {
+  componentDidMount = () => {
+    if (!(this.props.loggedInUser && this.props.loggedInUser.userId)) {
+      this.props.history.push("/");
+    } else {
+      if (!this.props.knowConnections) {
+        this.props.getConnectionHistory();
+      }
+    }
+  };
+
+  render() {
+    return (
+      <div className="page">
+        <h2>My previous cards</h2>
+        <div className="history">
+          {this.props.connections &&
+            this.props.connections.map((connection) => (
+              <ConnectionWithLink
+                card1={connection.card1}
+                card2={connection.card2}
+              />
+            ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 const mapStateToProps = (state) => {
-  return { loggedInUser: state.auth.loggedInUser };
+  return {
+    loggedInUser: state.auth.loggedInUser,
+    connections: state.connection.connections,
+    knowConnections: state.connection.knowConnections,
+  };
 };
 
-export default connect(mapStateToProps)(History);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getConnectionHistory: () => dispatch(viewByCreator()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(History);

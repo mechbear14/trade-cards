@@ -1,19 +1,16 @@
 import * as Firebase from "firebase/app";
 import "firebase/firestore";
 
-export const getCardToday = (userId) => {
+export const getCardToday = () => {
   return (dispatch, getState) => {
-    let userRef = null;
+    let states = getState();
+    let userRef = states.auth.loggedInUserRef;
     let cardToday = null;
     let cardTodayRef = null;
     let completed = false;
     let newConnection = null;
 
-    let userPromise = Firebase.firestore()
-      .collection("users")
-      .doc(userId)
-      .get();
-    let card2Promise = userPromise.then((userDoc) => {
+    let card1Promise = userRef.get().then((userDoc) => {
       let cardPath = userDoc.data().card.path;
       if (cardPath) {
         return Firebase.firestore().doc(cardPath).get();
@@ -23,23 +20,22 @@ export const getCardToday = (userId) => {
         });
       }
     });
-    let connectionPromise = Promise.all([userPromise, card2Promise]).then(
-      ([userDoc, cardDoc]) => {
-        userRef = userDoc.ref;
-        cardTodayRef = cardDoc.ref;
-        let { kind, text } = cardDoc.data();
-        cardToday = { kind, text };
-        return Firebase.firestore()
-          .collection("connections")
-          .where("card1", "==", cardDoc.ref)
-          .where("addedBy", "==", userDoc.ref)
-          .get();
-      }
-    );
-    let card1Promise = connectionPromise.then((connectionDocs) => {
+
+    let connectionPromise = card1Promise.then((cardDoc) => {
+      cardTodayRef = cardDoc.ref;
+      let { kind, text } = cardDoc.data();
+      cardToday = { kind, text };
+      return Firebase.firestore()
+        .collection("connections")
+        .where("card1", "==", cardDoc.ref)
+        .where("addedBy", "==", userRef)
+        .get();
+    });
+
+    let card2Promise = connectionPromise.then((connectionDocs) => {
       completed = connectionDocs.docs.length > 0;
       if (completed) {
-        let card1path = connectionDocs.docs[0].data().card1.path;
+        let card1path = connectionDocs.docs[0].data().card2.path;
         return Firebase.firestore().doc(card1path).get();
       } else {
         return new Promise((resolve, reject) => {
@@ -47,6 +43,7 @@ export const getCardToday = (userId) => {
         });
       }
     });
+
     Promise.all([card1Promise, card2Promise])
       .then(([card1Doc, card2Doc]) => {
         dispatch({
@@ -98,26 +95,20 @@ export const getCardToday = (userId) => {
   };
 };
 
-export const respond = (userId, card) => {
+export const respond = (card) => {
   return (dispatch, getState) => {
     let states = getState();
-    console.log(states);
-    let userRef = null;
+    let userRef = states.auth.loggedInUserRef;
     let card1Ref = states.card.cardTodayRef;
     let card2Ref = null;
     Firebase.firestore()
-      .collection("users")
-      .doc(userId)
-      .get()
-      .then((userDoc) => {
-        userRef = userDoc.ref;
-        return Firebase.firestore().collection("cards").add({
-          kind: card.kind,
-          text: card.text,
-          addedBy: userRef,
-          addedAt: new Date(),
-          approved: false,
-        });
+      .collection("cards")
+      .add({
+        kind: card.kind,
+        text: card.text,
+        addedBy: userRef,
+        addedAt: new Date(),
+        approved: false,
       })
       .then((cardRef) => {
         card2Ref = cardRef;

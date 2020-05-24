@@ -56,6 +56,7 @@ export const register = (password, email) => {
 
 export const login = (callSign, password) => {
   return (dispatch, getState) => {
+    let userId = null;
     Firebase.firestore()
       .collection("users")
       .where("callSign", "==", callSign)
@@ -73,12 +74,20 @@ export const login = (callSign, password) => {
         }
       })
       .then((userCredential) => {
+        userId = userCredential.user.uid;
+        return Firebase.firestore()
+          .collection("users")
+          .doc(userCredential.user.uid)
+          .get();
+      })
+      .then((userDoc) => {
         dispatch({
           type: "LOGIN",
           loggedInUser: {
-            userId: userCredential.user.uid,
+            userId,
             callSign,
           },
+          loggedInUserRef: userDoc.ref,
         });
       })
       .catch((error) => {

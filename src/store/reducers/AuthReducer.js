@@ -1,6 +1,7 @@
 const initialState = {
   knowAuthInfo: false,
   loggedInUser: null,
+  loggedInUserRef: null,
   registeredUser: null,
   registerError: null,
   loginError: null,
@@ -28,9 +29,11 @@ export const AuthReducer = (state = initialState, action) => {
         registerError: null,
       };
     case "LOGIN":
+      console.log(action);
       return {
         ...state,
         loggedInUser: action.loggedInUser,
+        loggedInUserRef: action.loggedInUserRef,
         loginError: null,
       };
     case "LOGIN_ERROR":
@@ -38,6 +41,7 @@ export const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedInUser: null,
+        loggedInUserRef: null,
         loginError: action.error,
       };
     case "RESET_LOGIN_ERROR":
@@ -49,6 +53,7 @@ export const AuthReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedInUser: null,
+        loggedInUserRef: null,
       };
     case "LOGOUT_ERROR":
       return {
@@ -62,6 +67,7 @@ export const AuthReducer = (state = initialState, action) => {
         ...state,
         knowAuthInfo: true,
         loggedInUser: action.user,
+        loggedInUserRef: action.userRef,
       };
     default:
       return state;

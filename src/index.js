@@ -30,6 +30,7 @@ Firebase.auth().onAuthStateChanged((user) => {
         store.dispatch({
           type: "OPEN_APP",
           user: currentUser,
+          userRef: userDoc.ref,
         });
       });
   } else {

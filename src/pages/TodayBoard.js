@@ -12,8 +12,10 @@ class TodayBoard extends React.Component {
   componentDidMount = () => {
     if (!(this.props.loggedInUser && this.props.loggedInUser.userId)) {
       this.props.history.push("/");
-    } else if (!this.props.knowCompleted) {
-      this.props.getCardInfo(this.props.loggedInUser.userId);
+    } else {
+      if (!this.props.knowCompleted) {
+        this.props.getCardInfo();
+      }
     }
   };
 
@@ -49,7 +51,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCardInfo: (userId) => dispatch(getCardToday(userId)),
+    getCardInfo: () => dispatch(getCardToday()),
   };
 };
 

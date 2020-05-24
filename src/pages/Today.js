@@ -44,12 +44,11 @@ class Today extends React.Component {
       errors.push({ message: "Your response cannot be blank" });
     }
     if (errors.length === 0) {
-      let userId = this.props.loggedInUser.userId;
       let card = {
         kind: this.state.nextKind,
         text: this.state.nextText,
       };
-      this.props.respond(userId, card);
+      this.props.respond(card);
     } else {
       this.setState({
         errors,
@@ -136,7 +135,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    respond: (userId, card) => dispatch(respond(userId, card)),
+    respond: (card) => dispatch(respond(card)),
   };
 };
 

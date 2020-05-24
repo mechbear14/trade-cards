@@ -4,7 +4,7 @@ import Connection from "../components/Connection";
 
 import "./TodayComplete.css";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 
 function TodayComplete(props) {
   if (!(props.loggedInUser && props.loggedInUser.userId)) {
@@ -15,7 +15,7 @@ function TodayComplete(props) {
       <div className="box">
         <div className="column">
           <h2>You have submitted your response.</h2>
-          <p className="text">View all my previous responses</p>
+          <NavLink to="/history">View all my previous responses</NavLink>
         </div>
         <div className="column">
           <Connection
