@@ -22,6 +22,7 @@ export const CardReducer = (state = initialState, action) => {
         fetchCardError: null,
       };
     case "GET_CARD_ERROR": {
+      console.log(action);
       return {
         ...state,
         fetchCardError: action.error,
@@ -43,6 +44,7 @@ export const CardReducer = (state = initialState, action) => {
         respondError: action.error,
       };
     case "RESET_RESPOND_ERROR":
+      console.log(action);
       return {
         ...state,
         respondError: null,

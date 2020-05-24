@@ -10,7 +10,7 @@ const initialState = {
 export const ConnectionReducer = (state = initialState, action) => {
   switch (action.type) {
     case "VIEW_BY_CREATOR":
-      console.log(state);
+      console.log(action);
       return {
         ...state,
         knowConnections: true,
@@ -27,7 +27,6 @@ export const ConnectionReducer = (state = initialState, action) => {
         knowConnections: true,
         viewingCard: action.card,
         viewingCardRef: action.cardRef,
-        connections: [],
         connectionsWithCount: action.connections,
         viewError: null,
       };

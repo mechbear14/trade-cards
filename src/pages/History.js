@@ -18,18 +18,25 @@ class History extends React.Component {
   };
 
   render() {
+    let knowConnections = this.props.knowConnections;
+    let connectionContent =
+      this.props.connections.length > 0 ? (
+        this.props.connections.map((connection, index) => (
+          <ConnectionWithLink
+            key={index}
+            card1={connection.card1}
+            card2={connection.card2}
+          />
+        ))
+      ) : (
+        <p>You haven't responded to any card yet.</p>
+      );
+    console.log(this.props.connections);
     return (
       <div className="page">
         <h2>My previous cards</h2>
         <div className="history">
-          {this.props.connections &&
-            this.props.connections.map((connection, index) => (
-              <ConnectionWithLink
-                key={index}
-                card1={connection.card1}
-                card2={connection.card2}
-              />
-            ))}
+          {knowConnections ? connectionContent : <p>Loading</p>}
         </div>
       </div>
     );
