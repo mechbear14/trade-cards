@@ -21,6 +21,7 @@ export const ConnectionReducer = (state = initialState, action) => {
         viewError: null,
       };
     case "VIEW_BY_CARD":
+      console.log(action);
       return {
         ...state,
         knowConnections: true,

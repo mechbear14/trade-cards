@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 
 function CardWithCount(props) {
   return (
-    <NavLink to={`cards/${props.cardId}`} className="card-with-count">
+    <NavLink to={`/card/${props.cardId}`} className="card-with-count">
       <Card kind={props.kind} text={props.text} small={true} />
       <span className="count">{props.count}</span>
     </NavLink>

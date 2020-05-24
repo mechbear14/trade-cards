@@ -23,8 +23,9 @@ class History extends React.Component {
         <h2>My previous cards</h2>
         <div className="history">
           {this.props.connections &&
-            this.props.connections.map((connection) => (
+            this.props.connections.map((connection, index) => (
               <ConnectionWithLink
+                key={index}
                 card1={connection.card1}
                 card2={connection.card2}
               />

@@ -85,6 +85,10 @@ nav .container .span {
     margin-top: 0.5rem;
     align-self: flex-start;
   }
+
+  nav .container button:hover {
+    cursor: pointer;
+  }
 }
 
 @media screen and (min-width: 1000px) {
