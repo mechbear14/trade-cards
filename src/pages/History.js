@@ -1,24 +1,27 @@
 import React from "react";
 
 import ConnectionWithLink from "../components/ConnectionWithLink";
+import Error from "../components/Error";
 
 import "./History.css";
 import { connect } from "react-redux";
-import { viewByCreator } from "../store/actions/ConnectionActions";
+import { getHistory } from "../store/actions/HistoryActions";
+import { Redirect } from "react-router-dom";
+import { viewConnection } from "../store/actions/ViewActions";
 
 class History extends React.Component {
   componentDidMount = () => {
     if (!(this.props.loggedInUser && this.props.loggedInUser.userId)) {
       this.props.history.push("/");
     } else {
-      if (!this.props.knowConnections) {
-        this.props.getConnectionHistory();
+      if (!this.props.loaded) {
+        this.props.getHistory();
       }
     }
   };
 
   render() {
-    let knowConnections = this.props.knowConnections;
+    let loaded = this.props.loaded;
     let connectionContent =
       this.props.connections.length > 0 ? (
         this.props.connections.map((connection, index) => (
@@ -26,17 +29,19 @@ class History extends React.Component {
             key={index}
             card1={connection.card1}
             card2={connection.card2}
+            onClick={this.props.viewConnection}
           />
         ))
       ) : (
         <p>You haven't responded to any card yet.</p>
       );
-    console.log(this.props.connections);
     return (
       <div className="page">
+        {this.props.viewingCard ? <Redirect to="/card" /> : ""}
         <h2>My previous cards</h2>
         <div className="history">
-          {knowConnections ? connectionContent : <p>Loading</p>}
+          {this.props.error ? <Error message={this.props.error.message} /> : ""}
+          {loaded ? connectionContent : <p>Loading</p>}
         </div>
       </div>
     );
@@ -46,14 +51,17 @@ class History extends React.Component {
 const mapStateToProps = (state) => {
   return {
     loggedInUser: state.auth.loggedInUser,
-    connections: state.connection.connections,
-    knowConnections: state.connection.knowConnections,
+    loaded: state.history.loaded,
+    connections: state.history.connections,
+    error: state.history.error,
+    viewingCard: state.view.viewingCard,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getConnectionHistory: () => dispatch(viewByCreator()),
+    getHistory: () => dispatch(getHistory()),
+    viewConnection: (card) => dispatch(viewConnection(card)),
   };
 };
 

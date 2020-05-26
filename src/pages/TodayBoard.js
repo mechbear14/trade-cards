@@ -6,15 +6,17 @@ import Today from "./Today";
 import TodayComplete from "./TodayComplete";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getCardToday } from "../store/actions/CardActions";
+
+import { loadToday } from "../store/actions/TodayActions";
+import Error from "../components/Error";
 
 class TodayBoard extends React.Component {
   componentDidMount = () => {
     if (!(this.props.loggedInUser && this.props.loggedInUser.userId)) {
       this.props.history.push("/");
     } else {
-      if (!this.props.knowCompleted) {
-        this.props.getCardInfo();
+      if (!this.props.loadCompleted) {
+        this.props.loadToday();
       }
     }
   };
@@ -23,11 +25,21 @@ class TodayBoard extends React.Component {
     let pageToLoad = "";
     if (!(this.props.loggedInUser && this.props.loggedInUser.userId)) {
       return <Redirect to="/" />;
-    } else if (this.props.knowCompleted) {
-      if (this.props.completed) {
-        pageToLoad = <TodayComplete newConnection={this.props.newConnection} />;
+    } else {
+      if (this.props.loadCompleted) {
+        if (this.props.respondCompleted) {
+          pageToLoad = (
+            <TodayComplete newConnection={this.props.connectionToday} />
+          );
+        } else {
+          pageToLoad = <Today assignedCard={this.props.cardToday} />;
+        }
       } else {
-        pageToLoad = <Today assignedCard={this.props.cardToday} />;
+        if (this.props.todayLoadError) {
+          pageToLoad = <Error message={this.props.todayLoadError.message} />;
+        } else {
+          pageToLoad = <p>Loading</p>;
+        }
       }
     }
     return (
@@ -42,16 +54,17 @@ class TodayBoard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     loggedInUser: state.auth.loggedInUser,
-    knowCompleted: state.card.knowCompleted,
-    cardToday: state.card.cardToday,
-    completed: state.card.completed,
-    newConnection: state.card.newConnection,
+    loadCompleted: state.today.loadCompleted,
+    respondCompleted: state.today.respondCompleted,
+    cardToday: state.today.cardToday,
+    connectionToday: state.today.connectionToday,
+    todayLoadError: state.today.todayLoadError,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCardInfo: () => dispatch(getCardToday()),
+    loadToday: () => dispatch(loadToday()),
   };
 };
 

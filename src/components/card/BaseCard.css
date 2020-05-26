@@ -12,6 +12,10 @@
   text-decoration: none;
 }
 
+.with-link:hover {
+  cursor: pointer;
+}
+
 .card.small {
   width: 150px;
   height: 90px;

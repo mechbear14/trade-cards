@@ -1,3 +1,5 @@
+// TODO: Prevent double submission
+
 import React from "react";
 
 import Card from "../components/card/Card";
@@ -8,15 +10,14 @@ import Error from "../components/Error";
 
 import "./Today.css";
 import { connect } from "react-redux";
-import { respond } from "../store/actions/CardActions";
+import {
+  validateError,
+  resetError,
+  respondWith,
+} from "../store/actions/TodayActions";
 
 class Today extends React.Component {
   choices = [
-    {
-      name: "blue",
-      text: "Application (blue card)",
-      value: "blue",
-    },
     {
       name: "red",
       text: "Concept (red card)",
@@ -32,29 +33,17 @@ class Today extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nextKind: "blue",
+      nextKind: "red",
       nextText: "",
-      errors: [],
     };
   }
 
   onClick = () => {
-    let errors = [];
     if (this.state.nextText.length === 0) {
-      errors.push({ message: "Your response cannot be blank" });
-    }
-    if (errors.length === 0) {
-      let card = {
-        kind: this.state.nextKind,
-        text: this.state.nextText,
-      };
-      this.props.respond(card);
+      this.props.validateError("Your response cannot be blank");
     } else {
-      this.setState({
-        errors,
-      });
+      this.props.respondWith(this.state.nextKind, this.state.nextText);
     }
-    console.log(this.state);
   };
 
   onSelect = (e) => {
@@ -64,20 +53,13 @@ class Today extends React.Component {
   };
 
   getText = (text) => {
-    if (this.state.errors.length > 0) {
-      this.setState({
-        errors: [],
-      });
-    }
+    this.props.resetError();
     this.setState({
       nextText: text,
     });
   };
 
   render() {
-    let errors = this.state.errors.slice();
-    if (this.props.fetchCardError) errors.push(this.props.fetchCardError);
-    if (this.props.respondError) errors.push(this.props.respondError);
     return (
       <div className="page today">
         <div className="box">
@@ -105,13 +87,12 @@ class Today extends React.Component {
             </p>
             <div className="blank"> </div>
             <InputCard kind={this.state.nextKind} getText={this.getText} />
-            {errors[0] &&
-              errors.map((error, index) => (
-                <React.Fragment key={index}>
-                  <div className="blank"></div>
-                  <Error message={error.message} />
-                </React.Fragment>
-              ))}
+            {this.props.respondError && (
+              <React.Fragment>
+                <div className="blank"></div>
+                <Error message={this.props.respondError.message} />
+              </React.Fragment>
+            )}
             <p className="caption link">How to respond</p>
             <Button
               className="grid-item"
@@ -128,14 +109,15 @@ class Today extends React.Component {
 const mapStateToProps = (state) => {
   return {
     loggedInUser: state.auth.loggedInUser,
-    fetchError: state.card.fetchCardError,
-    respondError: state.card.respondError,
+    respondError: state.today.respondError,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    respond: (card) => dispatch(respond(card)),
+    validateError: (errorMsg) => dispatch(validateError(errorMsg)),
+    resetError: () => dispatch(resetError()),
+    respondWith: (kind, text) => dispatch(respondWith(kind, text)),
   };
 };
 

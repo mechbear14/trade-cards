@@ -25,7 +25,7 @@ class App extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/today" component={TodayBoard} />
           <Route path="/history" component={History} />
-          <Route path="/card/:id" component={ViewConnection} />
+          <Route path="/card" component={ViewConnection} />
           <Route path="/how-to-play" component={HowToPlay} />
           <Route path="/" component={Home} />
         </Switch>
