@@ -21,7 +21,7 @@ class Register extends React.Component {
   }
 
   onChange = (e) => {
-    this.props.resetErrors();
+    this.props.resetError();
     if (this.state.errors.length > 0) {
       this.setState({
         errors: [],
@@ -104,7 +104,11 @@ class Register extends React.Component {
                 onChange={this.onChange}
               />
               <div className="blank"></div>
-              <Button name="Register" onClick={this.onClick} />
+              <Button
+                name="Register"
+                onClick={this.onClick}
+                disabled={this.props.requestStarted}
+              />
             </div>
           </form>
         </div>
@@ -117,6 +121,7 @@ const mapStateToProps = (state) => {
   return {
     firebaseError: state.auth.error,
     registeredUser: state.auth.registeredUser,
+    requestStarted: state.auth.requestStarted,
   };
 };
 

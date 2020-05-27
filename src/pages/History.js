@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { getHistory } from "../store/actions/HistoryActions";
 import { Redirect } from "react-router-dom";
 import { viewConnection } from "../store/actions/ViewActions";
+import Loading from "../components/Loading";
 
 class History extends React.Component {
   componentDidMount = () => {
@@ -41,7 +42,7 @@ class History extends React.Component {
         <h2>My previous cards</h2>
         <div className="history">
           {this.props.error ? <Error message={this.props.error.message} /> : ""}
-          {loaded ? connectionContent : <p>Loading</p>}
+          {loaded ? connectionContent : <Loading />}
         </div>
       </div>
     );

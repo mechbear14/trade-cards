@@ -86,7 +86,11 @@ class Login extends React.Component {
               onChange={this.onChange}
             />
             <div className="blank"></div>
-            <Button name="Log in" onClick={this.onClick} />
+            <Button
+              name="Log in"
+              onClick={this.onClick}
+              disabled={this.props.requestStarted}
+            />
           </div>
         </form>
       </div>
@@ -98,6 +102,7 @@ const mapStateToProps = (state) => {
   return {
     firebaseError: state.auth.loginError,
     loggedInUser: state.auth.loggedInUser,
+    requestStarted: state.auth.requestStarted,
   };
 };
 

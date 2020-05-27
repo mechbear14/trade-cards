@@ -9,6 +9,7 @@ import { Redirect } from "react-router-dom";
 
 import { loadToday } from "../store/actions/TodayActions";
 import Error from "../components/Error";
+import Loading from "../components/Loading";
 
 class TodayBoard extends React.Component {
   componentDidMount = () => {
@@ -38,7 +39,7 @@ class TodayBoard extends React.Component {
         if (this.props.todayLoadError) {
           pageToLoad = <Error message={this.props.todayLoadError.message} />;
         } else {
-          pageToLoad = <p>Loading</p>;
+          pageToLoad = <Loading />;
         }
       }
     }

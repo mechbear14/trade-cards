@@ -62,45 +62,52 @@ class Today extends React.Component {
   render() {
     return (
       <div className="page today">
-        <div className="box">
-          <div className="column">
-            <h2>Your card today</h2>
-            <Card
-              kind={this.props.assignedCard.kind}
-              text={this.props.assignedCard.text}
-            />
+        {this.props.assignedCard ? (
+          <div className="box">
+            <div className="column">
+              <h2>Your card today</h2>
+              <Card
+                kind={this.props.assignedCard.kind}
+                text={this.props.assignedCard.text}
+              />
+            </div>
+            <div className="column">
+              <h2>Your response</h2>
+              <p>
+                Select a colour for the card, then click the card to respond.
+              </p>
+              <Choice
+                choices={this.choices}
+                name="nextKind"
+                onSelect={this.onSelect}
+              />
+              <div className="blank"> </div>
+              <p className="caption no-margin">
+                Write no more than 30 characters.
+              </p>
+              <p className="caption no-margin">
+                You cannot change your response once submitted.
+              </p>
+              <div className="blank"> </div>
+              <InputCard kind={this.state.nextKind} getText={this.getText} />
+              {this.props.respondError && (
+                <React.Fragment>
+                  <div className="blank"></div>
+                  <Error message={this.props.respondError.message} />
+                </React.Fragment>
+              )}
+              <p className="caption link">How to respond</p>
+              <Button
+                className="grid-item"
+                name="Submit"
+                onClick={this.onClick}
+                disabled={this.props.respondStarted}
+              />
+            </div>
           </div>
-          <div className="column">
-            <h2>Your response</h2>
-            <p>Select a colour for the card, then click the card to respond.</p>
-            <Choice
-              choices={this.choices}
-              name="nextKind"
-              onSelect={this.onSelect}
-            />
-            <div className="blank"> </div>
-            <p className="caption no-margin">
-              Write no more than 30 characters.
-            </p>
-            <p className="caption no-margin">
-              You cannot change your response once submitted.
-            </p>
-            <div className="blank"> </div>
-            <InputCard kind={this.state.nextKind} getText={this.getText} />
-            {this.props.respondError && (
-              <React.Fragment>
-                <div className="blank"></div>
-                <Error message={this.props.respondError.message} />
-              </React.Fragment>
-            )}
-            <p className="caption link">How to respond</p>
-            <Button
-              className="grid-item"
-              name="Submit"
-              onClick={this.onClick}
-            />
-          </div>
-        </div>
+        ) : (
+          "There's no card for you today yet"
+        )}
       </div>
     );
   }
@@ -110,6 +117,7 @@ const mapStateToProps = (state) => {
   return {
     loggedInUser: state.auth.loggedInUser,
     respondError: state.today.respondError,
+    respondStarted: state.today.respondStarted,
   };
 };
 

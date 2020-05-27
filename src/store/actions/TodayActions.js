@@ -44,6 +44,9 @@ export const resetError = () => {
 export const respondWith = (kind, text) => {
   let card = { kind, text };
   return (dispatch, getState) => {
+    dispatch({
+      type: "RESPOND_STARTED",
+    });
     let respondWithCard = Firebase.functions().httpsCallable("respondWithCard");
     respondWithCard({
       userId: getState().auth.loggedInUser.userId,

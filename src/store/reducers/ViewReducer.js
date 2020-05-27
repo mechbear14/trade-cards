@@ -31,6 +31,11 @@ export const ViewReducer = (state = initialState, action) => {
         ...state,
         ...initialState,
       };
+    case "LOGOUT":
+      return {
+        ...state,
+        ...initialState,
+      };
     default:
       return state;
   }

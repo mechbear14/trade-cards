@@ -1,5 +1,6 @@
 const initialState = {
   knowAuthInfo: false,
+  requestStarted: false,
   loggedInUser: null,
   loggedInUserRef: null,
   registeredUser: null,
@@ -10,17 +11,24 @@ const initialState = {
 
 export const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "REQUEST_STARTED":
+      return {
+        ...state,
+        requestStarted: true,
+      };
     case "REGISTER":
       return {
         ...state,
         registeredUser: action.newUser,
         registerError: null,
+        requestStarted: false,
       };
     case "REGISTER_ERROR":
       return {
         ...state,
         registeredUser: null,
         registerError: action.error,
+        requestStarted: false,
       };
     case "RESET_REGISTER_ERROR":
       return {
@@ -29,9 +37,9 @@ export const AuthReducer = (state = initialState, action) => {
         registerError: null,
       };
     case "LOGIN":
-      console.log(action);
       return {
         ...state,
+        requestStarted: false,
         loggedInUser: action.loggedInUser,
         loggedInUserRef: action.loggedInUserRef,
         loginError: null,
@@ -40,6 +48,7 @@ export const AuthReducer = (state = initialState, action) => {
       console.log(action);
       return {
         ...state,
+        requestStarted: false,
         loggedInUser: null,
         loggedInUserRef: null,
         loginError: action.error,

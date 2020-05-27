@@ -1,0 +1,79 @@
+.spinner {
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+.spinner .spinner-container {
+  width: 2em;
+  height: 2em;
+  overflow: hidden;
+  position: relative;
+}
+
+.spinner .spinner-container .spinner-card {
+  position: absolute;
+  border: 0.08em white solid;
+  width: 0.8em;
+  height: 0.6em;
+  border-radius: 0.1em;
+  box-sizing: border-box;
+}
+
+.spinner .spinner-container .spinner-card:nth-child(1) {
+  background-color: white;
+  transform-origin: center;
+  animation: card1 2s infinite;
+}
+
+.spinner .spinner-container .spinner-card:nth-child(2) {
+  transform-origin: center;
+  animation: card2 2s infinite;
+}
+
+@keyframes card1 {
+  0% {
+    top: 0.7em;
+    left: -1em;
+    transform: rotate(0deg);
+  }
+  25%,
+  50% {
+    top: 0.3em;
+    left: 0.2em;
+    transform: rotate(-30deg);
+  }
+  75% {
+    top: 0.7em;
+    left: 0.2em;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: -1em;
+    left: 0.2em;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes card2 {
+  0%,
+  25% {
+    bottom: 0.7em;
+    right: -1em;
+    transform: rotate(0deg);
+  }
+  50% {
+    bottom: 0.3em;
+    right: 0.2em;
+    transform: rotate(30deg);
+  }
+  75% {
+    bottom: 0.7em;
+    right: 0.2em;
+    transform: rotate(0deg);
+  }
+  100% {
+    bottom: 2.4em;
+    right: 0.2em;
+    transform: rotate(0deg);
+  }
+}

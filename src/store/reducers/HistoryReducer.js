@@ -24,6 +24,11 @@ export const HistoryReducer = (state = initialState, action) => {
         ...state,
         loaded: false,
       };
+    case "LOGOUT":
+      return {
+        ...state,
+        ...initialState,
+      };
     default:
       return state;
   }

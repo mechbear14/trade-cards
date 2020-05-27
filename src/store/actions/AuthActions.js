@@ -18,6 +18,9 @@ const getNewCallSign = () => {
 
 export const register = (password, email) => {
   return (dispatch, getState) => {
+    dispatch({
+      type: "REQUEST_STARTED",
+    });
     let callSignRoot = getNewCallSign();
     let callSign = "";
     let a = Firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -56,6 +59,9 @@ export const register = (password, email) => {
 
 export const login = (callSign, password) => {
   return (dispatch, getState) => {
+    dispatch({
+      type: "REQUEST_STARTED",
+    });
     let userId = null;
     Firebase.firestore()
       .collection("users")

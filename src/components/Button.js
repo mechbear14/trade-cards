@@ -1,21 +1,16 @@
 import React from "react";
 
+import Spinner from "./Spinner";
+
 import "./Button.css";
 
-class Button extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submitted: false,
-    };
-  }
-  render() {
-    return (
-      <div className="button">
-        <button onClick={this.props.onClick}>{this.props.name}</button>
-      </div>
-    );
-  }
+export default function Button(props) {
+  return (
+    <div className="button">
+      <button onClick={props.onClick} disabled={props.disabled}>
+        {props.disabled && <Spinner fontSize={"1rem"} />}
+        {props.name}
+      </button>
+    </div>
+  );
 }
-
-export default Button;

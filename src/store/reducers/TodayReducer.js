@@ -2,6 +2,7 @@ const initialState = {
   knowLoadCompleted: false,
   loadCompleted: false,
   respondCompleted: false,
+  respondStarted: false,
   cardToday: null,
   connectionToday: null,
   todayLoadError: null,
@@ -30,6 +31,12 @@ export const TodayReducer = (state = initialState, action) => {
         ...state,
         respondError: action.error,
       };
+    case "RESPOND_STARTED": {
+      return {
+        ...state,
+        respondStarted: true,
+      };
+    }
     case "RESPONDED":
       return {
         ...state,
@@ -41,6 +48,12 @@ export const TodayReducer = (state = initialState, action) => {
       return {
         ...state,
         respondError: action.error,
+        respondStarted: false,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        ...initialState,
       };
     default:
       return state;

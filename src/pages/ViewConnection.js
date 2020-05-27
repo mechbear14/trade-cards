@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { viewConnection, resetViewing } from "../store/actions/ViewActions";
+import Loading from "../components/Loading";
 
 class ViewConnection extends React.Component {
   componentWillUnmount = () => {
@@ -37,7 +38,7 @@ class ViewConnection extends React.Component {
         pageContent = connectedTo;
       }
     } else {
-      pageContent = <p>Loading</p>;
+      pageContent = <Loading />;
     }
 
     return (
