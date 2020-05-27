@@ -15,7 +15,9 @@ function TodayComplete(props) {
       <div className="box">
         <div className="column">
           <h2>You have submitted your response.</h2>
-          <NavLink to="/history">View all my previous responses</NavLink>
+          <NavLink to="/history" className="link">
+            View all my previous responses
+          </NavLink>
         </div>
         <div className="column">
           <Connection

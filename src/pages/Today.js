@@ -106,7 +106,7 @@ class Today extends React.Component {
             </div>
           </div>
         ) : (
-          "There's no card for you today yet"
+          <p>There's no card for you today yet</p>
         )}
       </div>
     );
