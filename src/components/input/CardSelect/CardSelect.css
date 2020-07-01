@@ -1,0 +1,44 @@
+.card-with-tick label {
+  position: relative;
+}
+
+.card-with-tick label input {
+  display: none;
+}
+
+.card-with-tick label:hover {
+  cursor: pointer;
+}
+
+.card-with-tick label:hover > .card-cover {
+  display: flex;
+}
+
+.card-with-tick label:hover > .card-cover .icon {
+  display: none;
+}
+
+.card-with-tick label input:checked + .card-cover {
+  display: flex;
+}
+
+.card-with-tick label input:checked + .card-cover .icon {
+  display: block;
+}
+
+.card-with-tick .card-cover {
+  width: 150px;
+  height: 90px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.card-with-tick .card-cover .icon {
+  color: white;
+  z-index: 3;
+}

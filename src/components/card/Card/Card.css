@@ -1,0 +1,51 @@
+.card {
+  width: 200px;
+  height: 120px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.card.small {
+  width: 150px;
+  height: 90px;
+  border-radius: 7.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.card.red,
+.card.red textarea {
+  background-color: var(--secondary);
+  color: var(--primary-text);
+}
+
+.card.white,
+.card.white textarea {
+  background-color: var(--primary-text);
+  color: var(--secondary);
+}
+
+.card.blue,
+.card.blue textarea {
+  background-color: rgb(2, 65, 212);
+  color: var(--primary-text);
+}
+
+.card.unknown,
+.card.unknown textarea {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--primary-text);
+}

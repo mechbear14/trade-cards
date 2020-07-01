@@ -1,0 +1,53 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.input label {
+  font-weight: 600;
+  position: absolute;
+  color: white;
+  transition: 0.2s ease-in-out;
+}
+
+.input label.empty {
+  top: 1.55rem;
+  font-size: 1.5rem;
+}
+
+.input label.filled {
+  top: 0;
+  font-size: 1.2rem;
+}
+
+.input input {
+  background-color: transparent;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  color: white;
+}
+
+.input .bottom-bar {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  left: 0;
+  bottom: -3px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.input .top-bar {
+  position: absolute;
+  width: 0%;
+  left: 0;
+  height: 3px;
+  bottom: -3px;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: 0.2s ease-in-out;
+}
+
+.input .top-bar.typing {
+  width: 100%;
+}

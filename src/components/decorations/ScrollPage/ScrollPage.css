@@ -1,0 +1,13 @@
+.scroll-page {
+  width: 100%;
+  overflow: hidden;
+}
+
+.scroll-page .scroll-page-box {
+  display: flex;
+  transition: all 0.2s ease-in-out;
+}
+
+.scroll-page .scroll-page-box .mini-page {
+  width: 50%;
+}

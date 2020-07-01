@@ -1,0 +1,59 @@
+.popup-message .message-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: -12;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.popup-message .message-box {
+  width: 360px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+  background-color: var(--primary);
+}
+
+.popup-message .message-box .message-heading {
+  width: 100%;
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+}
+
+.popup-message .message-box .message-heading .message-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.popup-message .message-box .message-heading button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary);
+  font-size: 2rem;
+}
+
+.popup-message .message-box .message-heading button:hover {
+  cursor: pointer;
+}
+
+.popup-message .message-box .message-body {
+  width: 100%;
+  padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+  font-size: 1.2rem;
+}
+
+.popup-message .message-box .blank {
+  height: 0.5rem;
+}

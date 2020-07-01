@@ -1,0 +1,28 @@
+.connection-judge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.connection-judge .option-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 800px) {
+  .connection-judge .option-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .connection-judge {
+    flex-direction: column;
+  }
+}

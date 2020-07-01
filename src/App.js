@@ -1,7 +1,5 @@
 import React from "react";
 
-import NavBar from "./components/NavBar";
-
 import Home from "./pages/infoPages/Home";
 import HowToPlay from "./pages/infoPages/HowToPlay";
 
@@ -14,12 +12,13 @@ import TodayBoard from "./pages/TodayBoard";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
+import TempNavBar from "./pages/TempNavBar";
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <NavBar />
+        <TempNavBar />
         <Switch>
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
