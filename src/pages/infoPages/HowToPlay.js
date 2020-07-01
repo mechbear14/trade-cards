@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown/with-html";
 
 import "../BasePage.css";
 
-import Card from "../../components/card/Card";
+import Card from "../../components/card/Card/Card";
 
 const section1 = `
 ## How to play
@@ -58,7 +58,7 @@ function HowToPlay(props) {
       <ReactMarkdown source={section1} />
       <h2>How to respond to a card</h2>
       <p>For example, if you're given this card</p>
-      <Card kind="white" text="Three.js" small={true} />
+      <Card card={{ kind: "white", text: "Three.js" }} small={true} />
       <p style={{ marginTop: 10 }}>
         which is a white (library/framework) card, you can go to its website
         (https://threejs.org/ in this case) and check its{" "}
@@ -68,17 +68,17 @@ function HowToPlay(props) {
         <li>
           It can be used to draw 3D stuff, which is a research field in computer
           science, so you respond with a red card{" "}
-          <Card kind="red" text="3D graphics" small={true} />
+          <Card card={{ kind: "red", text: "3D graphics" }} small={true} />
         </li>
         <li>
           It uses WebGL under the hood, which is an API (application programming
           interface), so you respond with a white card{" "}
-          <Card kind="white" text="WebGL" small={true} />
+          <Card card={{ kind: "white", text: "WebGL" }} small={true} />
         </li>
         <li>
           It provides a render engine for us to use, which is a kind of
           application, so you respond with a blue card{" "}
-          <Card kind="blue" text="Render engine" small={true} />
+          <Card card={{ kind: "blue", text: "Render engine" }} small={true} />
         </li>
       </ul>
       <ReactMarkdown source={section2} />

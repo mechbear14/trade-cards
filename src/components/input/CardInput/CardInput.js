@@ -2,6 +2,11 @@ import React, { useRef, useState } from "react";
 
 import "./CardInput.css";
 
+/**
+ * @param {*} card A temporary card object to control
+ * @param {*} propName
+ * @param {*} onChange Function to fire when text is put into the card
+ */
 export default function CardInput(props) {
   const hiddenBox = useRef(null);
   const [height, setHeight] = useState(0);

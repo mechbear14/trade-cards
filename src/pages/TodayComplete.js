@@ -1,6 +1,6 @@
 import React from "react";
 
-import Connection from "../components/Connection";
+import Connection from "../components/connection/Connection/Connection";
 
 import "./TodayComplete.css";
 import { connect } from "react-redux";

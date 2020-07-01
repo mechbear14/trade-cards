@@ -1,6 +1,7 @@
 import React from "react";
 
 import Home from "./pages/infoPages/Home";
+// import Home from "./pages/auth/Home";
 import HowToPlay from "./pages/infoPages/HowToPlay";
 
 import Login from "./pages/Login";

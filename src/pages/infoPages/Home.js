@@ -1,7 +1,7 @@
 import React from "react";
 
 import { NavLink } from "react-router-dom";
-import Button from "../../components/Button";
+import Button from "../../components/input/Button/Button";
 
 import "../BasePage.css";
 
@@ -10,7 +10,7 @@ export default function Home() {
     <div className="page">
       <h2>Discover the wonderful world of programming, with cards</h2>
       <NavLink to="/register">
-        <Button name="Register now" />
+        <Button text="Register now" />
       </NavLink>
     </div>
   );

@@ -2,11 +2,12 @@
 
 import React from "react";
 
-import Card from "../components/card/Card";
-import InputCard from "../components/card/InputCard";
-import Button from "../components/Button";
-import Choice from "../components/Choice";
-import Error from "../components/Error";
+import Card from "../components/card/Card/Card";
+// import CardInput from "../components/input/CardInput/CardInput";
+import Button from "../components/input/Button/Button";
+// import Choice from "../components/input/Choice/Choice";
+import ErrorBox from "../components/decorations/ErrorBox/ErrorBox";
+import CreateCard from "../components/compound/CreateCard/CreateCard";
 
 import "./Today.css";
 import { connect } from "react-redux";
@@ -67,8 +68,9 @@ class Today extends React.Component {
             <div className="column">
               <h2>Your card today</h2>
               <Card
-                kind={this.props.assignedCard.kind}
-                text={this.props.assignedCard.text}
+                card={this.props.assignedCard}
+                // kind={this.props.assignedCard.kind}
+                // text={this.props.assignedCard.text}
               />
             </div>
             <div className="column">
@@ -76,10 +78,15 @@ class Today extends React.Component {
               <p>
                 Select a colour for the card, then click the card to respond.
               </p>
-              <Choice
+              {/* <Choice
                 choices={this.choices}
                 name="nextKind"
                 onSelect={this.onSelect}
+              /> */}
+              <CreateCard
+                card={{ kind: this.state.nextKind, text: this.state.nextText }}
+                onSelectKind={this.onSelect}
+                onChangeText={this.getText}
               />
               <div className="blank"> </div>
               <p className="caption no-margin">
@@ -89,18 +96,18 @@ class Today extends React.Component {
                 You cannot change your response once submitted.
               </p>
               <div className="blank"> </div>
-              <InputCard kind={this.state.nextKind} getText={this.getText} />
+              {/* <CardInput kind={this.state.nextKind} getText={this.getText} /> */}
               {this.props.respondError && (
                 <React.Fragment>
                   <div className="blank"></div>
-                  <Error message={this.props.respondError.message} />
+                  <ErrorBox error={this.props.respondError} />
                 </React.Fragment>
               )}
               <p className="caption link">How to respond</p>
               <Button
                 className="grid-item"
-                name="Submit"
-                onClick={this.onClick}
+                text="Submit"
+                onButtonClick={this.onClick}
                 disabled={this.props.respondStarted}
               />
             </div>

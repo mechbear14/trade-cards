@@ -1,3 +1,9 @@
+:root {
+  --primary: rgb(1, 33, 105);
+  --secondary: rgb(200, 16, 46);
+  --primary-text: rgb(255, 255, 255);
+}
+
 * {
   margin: 0;
   padding: 0;

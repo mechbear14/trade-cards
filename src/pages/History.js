@@ -1,14 +1,15 @@
 import React from "react";
 
-import ConnectionWithLink from "../components/ConnectionWithLink";
-import Error from "../components/Error";
+// import ConnectionWithLink from "../components/ConnectionWithLink";
+import ErrorBox from "../components/decorations/ErrorBox/ErrorBox";
+import Loading from "../components/decorations/Loading/Loading";
+import Card from "../components/card/Card/Card";
 
 import "./History.css";
 import { connect } from "react-redux";
 import { getHistory } from "../store/actions/HistoryActions";
 import { Redirect } from "react-router-dom";
 import { viewConnection } from "../store/actions/ViewActions";
-import Loading from "../components/Loading";
 
 class History extends React.Component {
   componentDidMount = () => {
@@ -26,12 +27,16 @@ class History extends React.Component {
     let connectionContent =
       this.props.connections.length > 0 ? (
         this.props.connections.map((connection, index) => (
-          <ConnectionWithLink
-            key={index}
-            card1={connection.card1}
-            card2={connection.card2}
-            onClick={this.props.viewConnection}
-          />
+          // <ConnectionWithLink
+          //   key={index}
+          //   card1={connection.card1}
+          //   card2={connection.card2}
+          //   onClick={this.props.viewConnection}
+          // />
+          <React.Fragment>
+            <Card card={connection.card1} onClick={this.props.viewConnection} />
+            <Card card={connection.card2} onClick={this.props.viewConnection} />
+          </React.Fragment>
         ))
       ) : (
         <p>You haven't responded to any card yet.</p>
@@ -41,7 +46,7 @@ class History extends React.Component {
         {this.props.viewingCard ? <Redirect to="/card" /> : ""}
         <h2>My previous cards</h2>
         <div className="history">
-          {this.props.error ? <Error message={this.props.error.message} /> : ""}
+          {this.props.error ? <ErrorBox error={this.props.error} /> : ""}
           {loaded ? connectionContent : <Loading />}
         </div>
       </div>

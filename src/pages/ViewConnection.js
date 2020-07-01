@@ -1,15 +1,15 @@
 import React from "react";
 
-import Card from "../components/card/Card";
-import CardWithCount from "../components/card/CardWithCount";
-import Error from "../components/Error";
+import Card from "../components/card/Card/Card";
+// import CardWithCount from "../components/card/CardWithCount";
+import Error from "../components/decorations/ErrorBox/ErrorBox";
+import Loading from "../components/decorations/Loading/Loading";
 
 import "./ViewConnection.css";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { viewConnection, resetViewing } from "../store/actions/ViewActions";
-import Loading from "../components/Loading";
 
 class ViewConnection extends React.Component {
   componentWillUnmount = () => {
@@ -21,14 +21,20 @@ class ViewConnection extends React.Component {
       return <Redirect to="/" />;
     }
     let connectedTo = this.props.connected.map((connection, index) => (
-      <CardWithCount
-        kind={connection.card.kind}
-        text={connection.card.text}
-        count={connection.count}
-        cardId={connection.card.id}
-        key={index}
-        onClick={() => this.props.viewConnection(connection.card)}
-      />
+      // <CardWithCount
+      //   kind={connection.card.kind}
+      //   text={connection.card.text}
+      //   count={connection.count}
+      //   cardId={connection.card.id}
+      //   key={index}
+      //   onClick={() => this.props.viewConnection(connection.card)}
+      // />
+      <React.Fragment>
+        <Card card={connection.card} />
+        <p onClick={() => this.props.viewConnection(connection.card)}>
+          {connection.count}
+        </p>
+      </React.Fragment>
     ));
     let pageContent = "";
     if (this.props.loaded) {

@@ -1,8 +1,8 @@
 import React from "react";
 
-import LabelledInput from "../components/LabelledInput";
-import Button from "../components/Button";
-import Error from "../components/Error";
+import LabelledInput from "../components/input/LabelledInput/LabelledInput";
+import Button from "../components/input/Button/Button";
+import ErrorBox from "../components/decorations/ErrorBox/ErrorBox";
 
 import { login, resetLoginError } from "../store/actions/AuthActions";
 
@@ -66,29 +66,32 @@ class Login extends React.Component {
       <div className="page one-column">
         <form>
           <div className="box">
-            {errors[0] &&
+            {/* {errors[0] &&
               errors.map((error, index) => (
                 <React.Fragment key={index}>
-                  <Error message={error.message} />
+                  <ErrorBox message={error.message} />
                   <div className="blank"></div>
                 </React.Fragment>
-              ))}
+              ))} */}
+            {errors[0] && <ErrorBox error={errors} />}
             <LabelledInput
-              name="Your call sign"
+              text="Your call sign"
               type="text"
-              id="callSign"
+              propName="callSign"
+              value={this.state.callSign}
               onChange={this.onChange}
             />
             <LabelledInput
-              name="Password"
+              text="Password"
               type="password"
-              id="password"
+              propName="password"
+              value={this.state.password}
               onChange={this.onChange}
             />
             <div className="blank"></div>
             <Button
-              name="Log in"
-              onClick={this.onClick}
+              text="Log in"
+              onButtonClick={this.onClick}
               disabled={this.props.requestStarted}
             />
           </div>

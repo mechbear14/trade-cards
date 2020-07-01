@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { loadToday } from "../store/actions/TodayActions";
-import Error from "../components/Error";
-import Loading from "../components/Loading";
+import ErrorBox from "../components/decorations/ErrorBox/ErrorBox";
+import Loading from "../components/decorations/Loading/Loading";
 
 class TodayBoard extends React.Component {
   componentDidMount = () => {
@@ -37,7 +37,7 @@ class TodayBoard extends React.Component {
         }
       } else {
         if (this.props.todayLoadError) {
-          pageToLoad = <Error message={this.props.todayLoadError.message} />;
+          pageToLoad = <ErrorBox error={this.props.todayLoadError} />;
         } else {
           pageToLoad = <Loading />;
         }

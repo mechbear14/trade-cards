@@ -4,9 +4,9 @@ import { register, resetRegisterError } from "../store/actions/AuthActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import LabelledInput from "../components/LabelledInput";
-import Button from "../components/Button";
-import Error from "../components/Error";
+import LabelledInput from "../components/input/LabelledInput/LabelledInput";
+import Button from "../components/input/Button/Button";
+import ErrorBox from "../components/decorations/ErrorBox/ErrorBox";
 
 import "./Login.css";
 
@@ -84,29 +84,32 @@ class Register extends React.Component {
           <p>You will then be assigned your call sign for this season!</p>
           <form>
             <div className="box">
-              {errors[0] &&
-                errors.map((error, index) => (
-                  <React.Fragment key={index}>
-                    <Error message={error.message} />
-                    <div className="blank"></div>
-                  </React.Fragment>
-                ))}
+              {errors[0] && (
+                // errors.map((error, index) => (
+                //   <React.Fragment key={index}>
+                //     <ErrorBox message={error.message} />
+                //     <div className="blank"></div>
+                //   </React.Fragment>
+                <ErrorBox error={errors} />
+              )}
               <LabelledInput
-                name="Password"
+                labelText="Password"
                 type="password"
-                id="password"
+                value={this.state.password}
+                propName="password"
                 onChange={this.onChange}
               />
               <LabelledInput
-                name="Password recovery email"
+                labelText="Password recovery email"
                 type="email"
-                id="email"
+                value={this.state.email}
+                propName="email"
                 onChange={this.onChange}
               />
               <div className="blank"></div>
               <Button
-                name="Register"
-                onClick={this.onClick}
+                text="Register"
+                onButtonClick={this.onClick}
                 disabled={this.props.requestStarted}
               />
             </div>
