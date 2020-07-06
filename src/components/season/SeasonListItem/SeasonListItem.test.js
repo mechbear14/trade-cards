@@ -63,6 +63,10 @@ test("should toggle show/hide when clicked", () => {
   expect(screen.getByTestId("detail-box")).toHaveClass("hide");
 });
 
+/**
+ * TODO: Update these tests to match the table
+ */
+
 test("should display end register button when register open", () => {
   let today = new Date(2020, 8, 5, 9, 0, 0);
   render(<SeasonListItem season={season} today={today} />);

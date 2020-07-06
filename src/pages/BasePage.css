@@ -4,7 +4,7 @@
   margin-bottom: 5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   color: white;
 }
@@ -19,6 +19,22 @@
 
 .page.article li {
   margin-left: 2rem;
+}
+
+.page.one-column .box {
+  max-width: 320px;
+}
+
+.page.one-column form {
+  max-width: 100%;
+}
+
+.page.one-column .box .text {
+  margin: 0;
+}
+
+.page.one-column .box .blank {
+  height: 10px;
 }
 
 .page h1 {

@@ -33,26 +33,16 @@ export const register = (password, email) => {
         let uid = userCredential.user.uid;
         let postfix = querySnapshot.docs.length;
         callSign = `${callSignRoot}${postfix === 0 ? "" : postfix}`;
-        return Firebase.firestore().collection("users").doc(uid).set({
-          callSignRoot,
-          callSign,
-          email,
-        });
+        return Firebase.firestore()
+          .collection("users")
+          .doc(uid)
+          .set({ callSignRoot, callSign, email });
       })
       .then(() => {
-        dispatch({
-          type: "REGISTER",
-          newUser: {
-            email,
-            callSign,
-          },
-        });
+        dispatch({ type: "REGISTER", newUser: { email, callSign } });
       })
       .catch((error) => {
-        dispatch({
-          type: "REGISTER_ERROR",
-          error,
-        });
+        dispatch({ type: "REGISTER_ERROR", error });
       });
   };
 };

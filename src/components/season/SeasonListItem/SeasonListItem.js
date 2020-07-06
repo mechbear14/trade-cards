@@ -5,26 +5,12 @@ import { datesToMsg, timesToMsg } from "../SeasonDisplay/SeasonDisplay";
 
 import "./SeasonListItem.css";
 
-/**
- * TODO: Add "Publish" option
- */
-
-export default function SeasonListItem(props) {
-  const statusTexts = [
-    "Loading",
-    "Not open yet",
-    "Register open",
-    "Register closed",
-    "Season started",
-    "Season ended",
-    "Error",
-  ];
-
-  let today = moment(props.today);
-  let registerStartTime = moment(props.season.registerStartTime);
-  let registerEndTime = moment(props.season.registerEndTime);
-  let seasonStartDate = moment(props.season.seasonStartDate);
-  let seasonEndDate = moment(props.season.seasonEndDate);
+export function getSeasonStatusId(season, todayLocal) {
+  let today = moment(todayLocal);
+  let registerStartTime = moment(season.registerStartTime);
+  let registerEndTime = moment(season.registerEndTime);
+  let seasonStartDate = moment(season.seasonStartDate);
+  let seasonEndDate = moment(season.seasonEndDate);
 
   let notOpen = today.isBefore(registerStartTime);
   let registerOpen =
@@ -43,17 +29,32 @@ export default function SeasonListItem(props) {
   else if (seasonEnded) statusId = 5;
   else statusId = 6;
 
-  let status = statusTexts[statusId];
+  return statusId;
+}
 
-  let registerTimes = timesToMsg(
+export default function SeasonListItem(props) {
+  const statusTexts = [
+    "Loading",
+    "Not open yet",
+    "Register open",
+    "Register closed",
+    "Season started",
+    "Season ended",
+    "Error",
+  ];
+
+  const registerTimes = timesToMsg(
     props.season.registerStartTime,
     props.season.registerEndTime
   );
 
-  let dates = datesToMsg(
+  const dates = datesToMsg(
     props.season.seasonStartDate,
     props.season.seasonEndDate
   );
+
+  const statusId = getSeasonStatusId(props.season, props.today);
+  const status = statusTexts[statusId];
 
   const [detailBoxClass, setDetailBoxClass] = useState("detail-box hide");
   const toggleShowHide = () => {
@@ -96,16 +97,16 @@ export default function SeasonListItem(props) {
         </div>
         <div className="detail-item button-box">
           {statusId < 2 && <button className="normal">Edit</button>}
-          {statusId < 2 && !props.published && (
+          {statusId < 2 && !props.season.published && (
             <button className="normal">Publish</button>
           )}
-          {statusId === 2 && props.published && (
+          {statusId === 2 && props.season.published && (
             <button className="danger">End register</button>
           )}
-          {statusId === 4 && props.published && (
+          {statusId === 4 && props.season.published && (
             <button className="danger">End season</button>
           )}
-          {statusId < 4 && props.published && (
+          {statusId < 4 && props.season.published && (
             <button className="danger">Delete season</button>
           )}
         </div>

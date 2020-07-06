@@ -10,7 +10,6 @@ export function datesToMsg(startDate, endDate) {
 }
 
 /**
- * BUG: Not calculating sameDay correctly
  * @param {*} startTime
  * @param {*} endTime
  */
@@ -29,6 +28,10 @@ export function timesToMsg(startTime, endTime) {
   }
 }
 
+/**
+ * @param {*} today Date and time of now in local time
+ * @param {*} season Season to display
+ */
 export default function SeasonDisplay(props) {
   let registerEnded = moment(props.today).isAfter(
     moment(props.season.registerEndTime)
