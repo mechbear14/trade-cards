@@ -4,7 +4,6 @@
   margin-bottom: 5rem;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: center;
   color: white;
 }
@@ -19,6 +18,10 @@
 
 .page.article li {
   margin-left: 2rem;
+}
+
+.page.one-column {
+  align-items: center;
 }
 
 .page.one-column .box {
