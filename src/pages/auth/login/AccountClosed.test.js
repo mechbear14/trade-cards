@@ -7,18 +7,21 @@ import { AccountClosed } from "./AccountClosed";
 test("Should display inappropriate connections", () => {
   const connections = [
     {
+      id: 1,
       card1: { kind: "white", text: "OpenFrameworks" },
-      card2: { kind: "red", text: "Huawei" },
+      card2: { kind: "red", text: "Huawei1" },
       createdAt: new Date(2020, 6, 1),
     },
     {
+      id: 2,
       card1: { kind: "red", text: "Computing" },
-      card2: { kind: "red", text: "Huawei" },
+      card2: { kind: "red", text: "Huawei2" },
       createdAt: new Date(2020, 6, 2),
     },
     {
+      id: 3,
       card1: { kind: "red", text: "Text-based UI" },
-      card2: { kind: "red", text: "Huawei" },
+      card2: { kind: "red", text: "Huawei3" },
       createdAt: new Date(2020, 6, 3),
     },
   ];

@@ -23,16 +23,19 @@ describe("Should show the right page", () => {
   test("should show account closed", () => {
     const connections = [
       {
+        id: 1,
         card1: { kind: "white", text: "OpenFrameworks" },
         card2: { kind: "red", text: "Huawei" },
         createdAt: new Date(2020, 6, 1),
       },
       {
+        id: 2,
         card1: { kind: "red", text: "Computing" },
         card2: { kind: "red", text: "Huawei" },
         createdAt: new Date(2020, 6, 2),
       },
       {
+        id: 3,
         card1: { kind: "red", text: "Text-based UI" },
         card2: { kind: "red", text: "Huawei" },
         createdAt: new Date(2020, 6, 3),

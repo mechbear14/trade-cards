@@ -1,8 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-export const Register = () => {
-  return <div></div>;
+import { ConfirmEmail } from "./ConfirmEmail";
+import { RegisterForm } from "./RegisterForm";
+import { UsePrev } from "./UsePrev";
+
+import "../../BasePage.css";
+
+export const Register = (props) => {
+  return (
+    <div className="page">
+      {!props.user && <RegisterForm />}
+      {props.user && !props.user.verified && <ConfirmEmail />}
+      {props.user && props.user.previous && (
+        <UsePrev previousCallSign={props.user.callSign} />
+      )}
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({});

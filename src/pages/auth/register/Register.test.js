@@ -12,17 +12,17 @@ describe("Should go to the right page", () => {
   test("Should go to email confirmation", () => {
     render(<Register user={{ verified: false }} />);
     expect(
-      screen.queryByLabelText("We've sent you an email", { exact: false })
+      screen.queryByText("We've sent you an email", { exact: false })
     ).toBeInTheDocument();
   });
   test("Should ask whether to use previous account", () => {
     render(
       <Register
-        user={{ previous: { callSign: "ThunderBear", closed: false } }}
+        user={{ callSign: "ThunderBear", closed: false, previous: true }}
       />
     );
     expect(
-      screen.queryByText("this previous account", { exact: false })
+      screen.queryByText("this previous call sign", { exact: false })
     ).toBeInTheDocument();
   });
 });

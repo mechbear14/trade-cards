@@ -5,7 +5,7 @@ import "@testing-library/jest-dom";
 import { Validate } from "./Validate";
 
 test("Should display callSign and Today", () => {
-  render(<Validate callSign={"ThunderBear"} />);
+  render(<Validate uid="1234" callSign={"ThunderBear"} />);
   expect(
     screen.queryByText("ThunderBear", { exact: false })
   ).toBeInTheDocument();
