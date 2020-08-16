@@ -1,0 +1,17 @@
+.connection-with-date {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.connection-with-date .datetime {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-right: 0.5rem;
+  color: var(--primary-text);
+}

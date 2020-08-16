@@ -1,32 +1,8 @@
 import React from "react";
 import moment from "moment";
+import { timesToMsg, datesToMsg } from "../Common";
 
 import "./SeasonDisplay.css";
-
-export function datesToMsg(startDate, endDate) {
-  return `${moment(startDate).format("DDMMMYY")}-${moment(endDate).format(
-    "DDMMMYY"
-  )}`.toUpperCase();
-}
-
-/**
- * @param {*} startTime
- * @param {*} endTime
- */
-export function timesToMsg(startTime, endTime) {
-  let sameDay =
-    moment(startTime).dayOfYear() === moment(endTime).dayOfYear() &&
-    moment(startTime).year() === moment(endTime).year();
-  if (sameDay) {
-    return `${moment(startTime).format("HHmm")}-${moment(endTime).format(
-      "HHmm"
-    )} ${moment(startTime).format("DDMMMYY")}`.toUpperCase();
-  } else {
-    return `${moment(startTime).format("HHmm DDMMMYY")}-${moment(
-      endTime
-    ).format("HHmm DDMMMYY")}`.toUpperCase();
-  }
-}
 
 /**
  * @param {*} today Date and time of now in local time

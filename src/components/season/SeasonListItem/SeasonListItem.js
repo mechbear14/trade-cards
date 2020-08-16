@@ -1,40 +1,18 @@
 import React, { useState } from "react";
-import moment from "moment";
 
-import { datesToMsg, timesToMsg } from "../SeasonDisplay/SeasonDisplay";
+import { datesToMsg, timesToMsg, getSeasonStatusId } from "../Common";
+import {
+  NOT_STARTED,
+  REGISTER_OPEN,
+  REGISTER_CLOSED,
+  SEASON_ENDED,
+  SEASON_STARTED,
+} from "../Common";
 
 import "./SeasonListItem.css";
 
-export function getSeasonStatusId(season, todayLocal) {
-  let today = moment(todayLocal);
-  let registerStartTime = moment(season.registerStartTime);
-  let registerEndTime = moment(season.registerEndTime);
-  let seasonStartDate = moment(season.seasonStartDate);
-  let seasonEndDate = moment(season.seasonEndDate);
-
-  let notOpen = today.isBefore(registerStartTime);
-  let registerOpen =
-    today.isAfter(registerStartTime) && today.isBefore(registerEndTime);
-  let registerClosed =
-    today.isAfter(registerEndTime) && today.isBefore(seasonStartDate);
-  let seasonStarted =
-    today.isAfter(seasonStartDate) && today.isBefore(seasonEndDate);
-  let seasonEnded = today.isAfter(seasonEndDate);
-
-  let statusId = 0;
-  if (notOpen) statusId = 1;
-  else if (registerOpen) statusId = 2;
-  else if (registerClosed) statusId = 3;
-  else if (seasonStarted) statusId = 4;
-  else if (seasonEnded) statusId = 5;
-  else statusId = 6;
-
-  return statusId;
-}
-
 export default function SeasonListItem(props) {
   const statusTexts = [
-    "Loading",
     "Not open yet",
     "Register open",
     "Register closed",
@@ -42,6 +20,12 @@ export default function SeasonListItem(props) {
     "Season ended",
     "Error",
   ];
+
+  // Discuss this
+  const canEdit = [];
+  const canEndRegister = [];
+  const canEndSeason = [];
+  const canDelete = [];
 
   const registerTimes = timesToMsg(
     props.season.registerStartTime,
